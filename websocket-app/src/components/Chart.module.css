@@ -1,0 +1,17 @@
+/* LineChart.module.css */
+
+.container {
+  max-width: 80%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.calendarContainer {
+  margin-bottom: 20px;
+}
+
+.chartContainer {
+  margin-top: 20px;
+}

@@ -1,0 +1,222 @@
+.navbar {
+    background: #091E34 !important;
+    min-height: 60px !important;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-collapse .nav-link {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.nav-link svg {
+    margin-top: -5px;
+}
+
+.navbar-brand {
+    margin-left: 15px;
+}
+
+.logo,
+.nav-item {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.profileimg {
+    height: 36px;
+    padding: 0px;
+}
+
+#profiledropdown {
+    padding: 0px 5px 0px 0px !important;
+    border: 2px solid #45709C !important;
+    border-radius: 25px !important;
+
+}
+
+.profilename {
+    font-weight: 700;
+}
+
+.show,
+.active {
+    color: #FFBE3D !important;
+}
+
+.set-time,
+.search-input {
+    border: 2px solid #45709C !important;
+    padding-left: 1em;
+    border-radius: 5px;
+    background: transparent;
+}
+
+.set-time input,
+.search-input input {
+    background-color: transparent;
+    width: 10.3em;
+    border: none !important;
+    padding: 0.4rem !important;
+}
+
+.set-time .form-control,
+.search-input .form-control,
+.set-time input::placeholder,
+.search-input input::placeholder,
+.plottime,
+.plotdate {
+    color: white !important;
+}
+
+.plottime,
+.plotdate {
+    font-family: Digital Numbers;
+    margin: 0px;
+    background-color: transparent;
+    padding: 0.4rem !important;
+    border: 2px solid #45709C !important;
+}
+
+.plotdate {
+    border-radius: 2em 0px 0px 2em;
+}
+
+.plottime {
+    border-radius: 0px 2em 2em 0px;
+}
+
+.plot-clock {
+    margin-bottom: 0px;
+}
+
+.set-time .form-control:focus,
+.speed .form-control:focus,
+.search-input .form-control:focus,
+.theme .form-control:focus {
+    background-color: transparent !important;
+    border-color: none !important;
+    box-shadow: none !important;
+}
+
+.speed {
+    border-radius: 5px;
+}
+
+.search-input {
+    border-radius: 50px;
+    padding-left: 1em;
+}
+
+.search-input input {
+    font-family: Charlie Text;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin-left: 5px;
+    color: white !important;
+}
+
+.input-group {
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.select-speed {
+    background: #0E2E4F;
+    border: 2px solid #45709C !important;
+}
+
+select option {
+    color: black;
+    background-color: transparent;
+    font-family: Charlie Text;
+}
+
+select {
+    appearance: auto;
+}
+
+.map-search-popup {
+    display: none;
+    position: fixed;
+    width: 328px;
+    height: 500px;
+    top: 60px;
+    right: 3em;
+    border-radius: 8px;
+    background-color: white;
+    z-index: 1000;
+
+}
+
+.map-search-popup-closer {
+    text-decoration: none;
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.btn-light {
+    background: #FFFFFF !important;
+    border: 1px solid #CDCBCB;
+    border-radius: 8px;
+    color: #434449;
+    font-family: Charlie Text;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.search-by button {
+    margin: 5px !important;
+}
+
+.search-result h5,
+.search-by h5,
+.search-history h5 {
+    font-family: Charlie Text;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-transform: uppercase;
+    margin-top: 10px;
+    color: #C2C4C8;
+
+}
+
+.btn-dark {
+    background: #1598FF !important;
+}
+
+.search-history li,
+.search-result li {
+    list-style: none;
+}
+
+.search-result ul {
+    max-height: 160px;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 1000px) {
+    li{
+        width: fit-content;
+        margin-top: 5px;
+    }
+  }

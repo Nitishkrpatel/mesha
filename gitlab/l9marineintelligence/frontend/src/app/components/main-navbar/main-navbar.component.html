@@ -1,0 +1,228 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <img src="assets/images/logo.svg" alt="logo" width="60em" class="logo">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li [ngClass]="{ 'active': currentURL === '/anomaly-info'}" class="nav-item mainNavItem"
+          *ngIf="hidedashboard === 'true'">
+          <a class="nav-link dashboard" routerLink="/anomaly-info" (click)="reloadCurrentPage('anomaly-info')"
+            routerLinkActive="active">
+            <!-- <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="imageColors" [ngClass]="{ 'activeImg': currentURL === '/anomaly-info'}"
+                d="M7.85667 0.794245C8.98981 0.16585 10.4312 0.578725 11.0645 1.70174L17.1218 12.2143C17.2551 12.5281 17.3134 12.7833 17.3301 13.0484C17.3634 13.6677 17.1468 14.2696 16.7218 14.7329C16.2969 15.1945 15.722 15.467 15.0971 15.5H2.89917C2.64088 15.4843 2.38259 15.4257 2.14096 15.3349C0.932833 14.8477 0.349598 13.4769 0.841181 12.2887L6.94015 1.69431C7.14845 1.3219 7.46507 1.00068 7.85667 0.794245ZM8.99814 10.7272C8.59821 10.7272 8.26493 11.0575 8.26493 11.4547C8.26493 11.8502 8.59821 12.1813 8.99814 12.1813C9.39807 12.1813 9.72302 11.8502 9.72302 11.4456C9.72302 11.05 9.39807 10.7272 8.99814 10.7272ZM8.99814 5.57533C8.59821 5.57533 8.26493 5.89654 8.26493 6.29373V8.62977C8.26493 9.02613 8.59821 9.35726 8.99814 9.35726C9.39807 9.35726 9.72302 9.02613 9.72302 8.62977V6.29373C9.72302 5.89654 9.39807 5.57533 8.99814 5.57533Z" />
+            </svg> -->
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="imageColors" [ngClass]="{ 'activeImg': currentURL === '/anomaly-info'}"
+                d="M5.61236 16.3111V13.763C5.61236 13.1125 6.14352 12.5852 6.79874 12.5852H9.19388C9.50853 12.5852 9.81029 12.7093 10.0328 12.9302C10.2553 13.1511 10.3803 13.4506 10.3803 13.763V16.3111C10.3783 16.5815 10.4851 16.8416 10.677 17.0335C10.8689 17.2254 11.1301 17.3333 11.4025 17.3333H13.0366C13.7997 17.3353 14.5323 17.0357 15.0727 16.5007C15.613 15.9656 15.9167 15.2391 15.9167 14.4815V7.22237C15.9167 6.61037 15.6434 6.02986 15.1706 5.63721L9.61173 1.22988C8.64476 0.457125 7.2593 0.482075 6.3212 1.28914L0.889218 5.63721C0.393991 6.01828 0.0980009 6.60052 0.083374 7.22237V14.4741C0.083374 16.0532 1.37286 17.3333 2.96352 17.3333H4.56028C5.12606 17.3333 5.58587 16.8802 5.58997 16.3185L5.61236 16.3111Z" />
+            </svg>
+            DASHBOARD
+          </a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" aria-current="page" routerLink="/dashboard" routerLinkActive="active"
+            (click)="reloadCurrentPage('dashboard')">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="imageColors" [ngClass]="{ 'activeImg': currentURL === '/dashboard'}"
+                d="M5.61236 16.3111V13.763C5.61236 13.1125 6.14352 12.5852 6.79874 12.5852H9.19388C9.50853 12.5852 9.81029 12.7093 10.0328 12.9302C10.2553 13.1511 10.3803 13.4506 10.3803 13.763V16.3111C10.3783 16.5815 10.4851 16.8416 10.677 17.0335C10.8689 17.2254 11.1301 17.3333 11.4025 17.3333H13.0366C13.7997 17.3353 14.5323 17.0357 15.0727 16.5007C15.613 15.9656 15.9167 15.2391 15.9167 14.4815V7.22237C15.9167 6.61037 15.6434 6.02986 15.1706 5.63721L9.61173 1.22988C8.64476 0.457125 7.2593 0.482075 6.3212 1.28914L0.889218 5.63721C0.393991 6.01828 0.0980009 6.60052 0.083374 7.22237V14.4741C0.083374 16.0532 1.37286 17.3333 2.96352 17.3333H4.56028C5.12606 17.3333 5.58587 16.8802 5.58997 16.3185L5.61236 16.3111Z" />
+            </svg>
+            DASHBOARD</a>
+        </li> -->
+        <li class="nav-item" *ngIf="hideshipmap === 'true'">
+          <a class="nav-link" aria-current="page" routerLink="/Ship-map" routerLinkActive="active"
+            (click)="reloadCurrentPage('Ship-map')">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="imageColors" [ngClass]="{ 'activeImg': currentURL === '/Ship-map'}"
+                d="M10 6.45833C8.04399 6.45833 6.45833 8.04399 6.45833 10C6.45833 11.956 8.04399 13.5417 10 13.5417C11.956 13.5417 13.5417 11.956 13.5417 10C13.5417 8.04399 11.956 6.45833 10 6.45833Z" />
+              <path id="imageColors" [ngClass]="{ 'activeImg': currentURL === '/Ship-map'}" fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M10 0.625C4.82233 0.625 0.625 4.82233 0.625 10C0.625 15.1777 4.82233 19.375 10 19.375C15.1777 19.375 19.375 15.1777 19.375 10C19.375 4.82233 15.1777 0.625 10 0.625ZM2.70833 10C2.70833 5.97292 5.97292 2.70833 10 2.70833C14.0271 2.70833 17.2917 5.97292 17.2917 10C17.2917 14.0271 14.0271 17.2917 10 17.2917C5.97292 17.2917 2.70833 14.0271 2.70833 10Z" />
+            </svg>
+            SHIP MAP</a>
+        </li>
+        <li [ngClass]="{ 'active': currentURL === '/play-history'}" class="nav-item mainNavItem"
+          *ngIf="hideplayhistory === 'true'">
+          <a class="nav-link" routerLink="/play-history" (click)="reloadCurrentPage('play-history')"
+            routerLinkActive="active">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path id="imageColors" [ngClass]="{ 'activeImg': currentURL === '/play-history'}"
+                d="M8.99996 0.666656C13.5929 0.666656 17.3333 4.4052 17.3333 9.00481C17.3333 13.5948 13.5929 17.3333 8.99996 17.3333C4.40697 17.3333 0.666626 13.5948 0.666626 9.00481C0.666626 4.4052 4.40697 0.666656 8.99996 0.666656ZM8.0508 5.69158C7.87383 5.69158 7.70491 5.73178 7.54404 5.81218C7.34295 5.92474 7.18207 6.10161 7.09359 6.31065C7.03728 6.45537 6.9488 6.88952 6.9488 6.89756C6.86032 7.37191 6.81206 8.14374 6.81206 8.99597C6.81206 9.8088 6.86032 10.5477 6.93271 11.0301C6.94076 11.0381 7.02924 11.5768 7.12576 11.7617C7.30273 12.0994 7.64861 12.3084 8.01862 12.3084H8.0508C8.29211 12.3004 8.79887 12.0913 8.79887 12.0833C9.6515 11.7295 11.3327 10.6281 12.0083 9.89644L12.0566 9.8482C12.1451 9.75976 12.2577 9.62308 12.2818 9.59092C12.4105 9.42208 12.4749 9.21305 12.4749 9.00481C12.4749 8.77085 12.4025 8.55378 12.2657 8.3769C12.2336 8.34474 12.1129 8.20806 12.0003 8.0955C11.3407 7.38799 9.61933 6.23025 8.71843 5.8765C8.58168 5.82102 8.2358 5.69962 8.0508 5.69158Z" />
+            </svg>
+            Play History
+          </a>
+        </li>
+
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <!-- set clock input  -->
+        <li class="nav-item" *ngIf="adjustDateTimeFlag === 'true' && hideSetTime ==='true'">
+          <div class="input-group set-time" id="adjustDateTime" matTooltip="Adjust Date & Time"
+            style="padding-left:5px ;cursor: pointer">
+            <img src="assets/main-navbar/calender.svg" alt="calender">
+            <form [formGroup]="timestampForm" noValidate>
+              <input [max]=today class="form-control" formControlName="timestamp" [owlDateTime]="dt1"
+                [owlDateTimeTrigger]="dt1" placeholder={{convertedAdjustedTime}} (ngModelChange)="setAdjustedTime()">
+              <owl-date-time #dt1 [startAt]="startAt"></owl-date-time>
+            </form>
+          </div>
+        </li>
+        <!-- End set clock input  -->
+        <li class="nav-item" *ngIf="showInputForDateTime === true && hideResetTime ==='true'">
+          <div class="input-group set-time" id="adjustDateTime" matTooltip="Adjust Date & Time"
+            style="padding-left: 5px;">
+            <img src="assets/main-navbar/calender.svg" alt="calender">
+            <form [formGroup]="timestampForm" noValidate>
+              <input [max]=today class="form-control" formControlName="timestamp" [owlDateTime]="dt1"
+                [owlDateTimeTrigger]="dt1" placeholder="set adjusted time" (ngModelChange)="setAdjustedTime()">
+              <owl-date-time #dt1 [startAt]="startAt"></owl-date-time>
+            </form>
+          </div>
+        </li>
+
+        <li class="nav-item" style="margin-top: 6px !important;"
+          *ngIf="adjustDateTimeFlag === 'true' && hideResetTime ==='true'">
+          <div>
+            <a *ngIf='resetclockStatus === true' class="nav-link " (click)="syncToServerTime()"
+              matTooltip="Sync Current Time" style='padding:0px;'>
+              <img src="assets/main-navbar/reset.svg" alt="">
+            </a>
+
+            <a *ngIf='resetclockStatus === false' class="nav-link" matTooltip="Sync Current Time"
+              style="cursor: not-allowed;padding:0px;">
+              <img src="assets/main-navbar/reset.svg" alt="">
+            </a>
+          </div>
+
+        </li>
+
+
+
+        <!-- reset adjusted clock show/hide button -->
+
+        <li class="nav-item showAdjustedTimeInput" matTooltip="Set adjusted time" id="showAdjustedTimeInput"
+          (click)="showAdjustedTimeInput()" *ngIf="adjustDateTimeFlag === 'false' && hideSetAdjustedTime === 'true'">
+          <img src="assets/main-navbar/Time.svg" alt="Set adjusted time" width="20px" height="20px"
+            style="margin-top: 10px;">
+        </li>
+
+        <!--end  reset adjusted clock show/hide button -->
+
+        <!-- Change Speed -->
+        <li class="nav-item" *ngIf="adjustDateTimeFlag === 'true' && hideSpeed ==='true'">
+          <div class="input-group speed">
+            <form [formGroup]="setSpeedForm" noValidate>
+              <select (change)="setSpeed()" class="form-control form-select select-speed"
+                aria-label="Default select example" formControlName="speed" value=speed id="speed"
+                style="color: white;padding: 9px 0px!important; cursor: pointer">
+                <option value="1x">Speed (1x) </option>
+                <option value="2x">Speed (2x) </option>
+                <option value="3x">Speed (3x) </option>
+                <option value="4x">Speed (4x) </option>
+                <option value="5x">Speed (5x) </option>
+                <option value="100x">Speed (100x) </option>
+                <option value="1000x">Speed (1000x) </option>
+                <option value="10000x">Speed (10000x) </option>
+              </select>
+            </form>
+          </div>
+        </li>
+        <!-- End Change Speed -->
+        <!-- play and pause -->
+        <!-- <li class="nav-item" *ngIf="adjustDateTimeFlag === 'true' && hidePlayPause ==='true'">
+          <img [src]="clockStatus ? 'assets/main-navbar/Play.svg' : 'assets/main-navbar/Pause.svg'" alt=""
+            style="margin-top: 13px;cursor: pointer" (click)="changeClockStatus()">
+        </li> -->
+        <!-- end play and pause -->
+
+
+        <!-- plot clock -->
+        <li class="nav-item" matTooltip="Plot Clock" *ngIf="hideplotClock === 'true'">
+          <p class="input-group plot-clock" id="adjustDateTime">
+            <span id='plotdate' class="plotdate">{{this.plotdate}}</span>
+            <span id='plottime' class="plottime">{{this.plottime}}</span>
+            <!-- play and pause -->
+            <span class="nav-item plottime" style="background-color: white;" *ngIf="adjustDateTimeFlag === 'true' && hidePlayPause ==='true'">
+              <img [src]="clockStatus ? 'assets/main-navbar/Play.svg' : 'assets/main-navbar/Pause.svg'" alt=""
+                style="cursor: pointer" (click)="changeClockStatus()"></span>
+            <!-- end play and pause -->
+          </p>
+        </li>
+
+        <!-- end plot clock -->
+
+        <!-- search -->
+        <li *ngIf="hideSearch === 'true'">
+          <div class="input-group search-input" id="inputSearch">
+            <img src="assets/main-navbar/search.svg" alt="search" width="16px" height="16px">
+            <form [formGroup]="searchForm" noValidate>
+              <input type="text" formControlName="search_txt" id="search" class="form-control" placeholder="Search"
+                (focus)="displaySearchPopup()" (click)="getSearchHistory()"
+                (keydown.enter)='searchShip(); $event.preventDefault() ' autocomplete="off">
+              <mat-card id="search-popup" class="map-search-popup">
+                <a id="map-search-popup-closer" (click)="closeSearchPopup()"
+                  class="map-search-popup-closer"><b>x</b></a>
+
+                <div class="search-by" id="search-content">
+                  <h5>SEARCH BY:</h5>
+                  <button class="btn btn-light" *ngFor="let c of searchCategorty" (click)="selectCategory(c.value)"
+                    id={{c.value}}>{{ c.name }}</button>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="search-history">
+                  <h5>RECENT HISTORY</h5>
+                  <ul>
+                    <li *ngFor="let d of recenthistory"
+                      (click)="selectFromHistoryOrResult(d.search_query, d.search_type)">
+                      <span>{{ d.search_query }}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="search-result">
+                  <h5>Search Results</h5>
+                  <ul>
+                    <li *ngFor="let d of searchResultData" (click)="selectFromHistoryOrResult(d.val, d.type)">
+                      <span>{{ d.val }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </mat-card>
+
+            </form>
+            <img src="assets/main-navbar/clear.svg" alt="search" width="16px" height="16px" style="margin-right:10px;"
+              (click)="clearSearch()">
+          </div>
+        </li>
+
+
+        <!-- end search -->
+        <li class="nav-item dropdown me-3">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+            matTooltip={{username}} id="profiledropdown">
+            <img src="assets/admin-img/Avatar.svg" alt="profile" class="profileimg">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item profilename"><img src="assets/admin-img/profile.svg" alt="profile"
+                  style="margin-right: 5px;">{{username}}</a></li>
+            <li><a class="dropdown-item">{{roles}}</a></li>
+            <!-- <li><a class="dropdown-item" routerLink="/admin-console"><img src="assets/admin-img/setting.svg" alt=""
+                  style="margin-right: 5px;">Admin Console</a></li> -->
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" (click)="logOut()">
+                <img src="assets/admin-img/logout.svg" alt="logout" style="margin-right: 5px;">LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,88 @@
+<div id="shiptype-anomaly" *ngIf="showShiptypeAnoamlies === true">
+    <mat-spinner class="center-spinner" *ngIf="isloading">hello</mat-spinner>
+    <div class="row" style="margin-top: 25px">
+        <div class="col-xl-4 col-sm-4">
+            <p class="sub-title">Total Number of</p>
+            <h4 class="title">Ship Type Anomalies - {{ totalShipTypeAnomalies }}
+                <span>out of</span>
+                {{totalAnomalyCount}} trajectories
+            </h4>
+        </div>
+        <div class="col-xl-4 col-sm-4">
+            <form noValidate>
+                <div class="row monthanddate">
+                    <div class="col-xl-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label style="color: #174C83 !important;">Month and Year</mat-label>
+                            <input matInput [matDatepicker]="dp" [formControl]="fromdate"
+                                style="color: #174C83 !important;" [max]="maxDate" id="shiptype_month_year">
+                            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                            <mat-datepicker #dp startView="multi-year" (monthSelected)="setFromMonthAndYear($event, dp)"
+                                panelClass="example-month-picker">
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4">
+                        <p *ngIf="showNote === true" class="sub-title">Note: Below data is shown as per
+                            user plottime and
+                            interval.</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-3 margin-bottom-10px col-sm-3">
+            <div class="input-group ship-search border-box">
+                <span style="margin-top: 0px;">
+                    <svg width="16" height="16" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M6.33335 0.166626C2.9276 0.166626 0.166687 2.92754 0.166687 6.33329C0.166687 9.73905 2.9276 12.5 6.33335 12.5C7.73544 12.5 9.0289 12.0317 10.0648 11.2433L12.4108 13.5892C12.7362 13.9146 13.2638 13.9146 13.5893 13.5892C13.9147 13.2638 13.9147 12.7361 13.5893 12.4107L11.2433 10.0648C12.0317 9.02883 12.5 7.73538 12.5 6.33329C12.5 2.92754 9.73911 0.166626 6.33335 0.166626ZM1.83335 6.33329C1.83335 3.84801 3.84807 1.83329 6.33335 1.83329C8.81863 1.83329 10.8334 3.84801 10.8334 6.33329C10.8334 7.54169 10.3575 8.63828 9.58221 9.44697C9.5574 9.46667 9.53354 9.48793 9.51076 9.5107C9.48799 9.53348 9.46673 9.55734 9.44703 9.58214C8.63834 10.3574 7.54176 10.8333 6.33335 10.8333C3.84807 10.8333 1.83335 8.81857 1.83335 6.33329Z" />
+                    </svg>
+                </span>
+                <form [formGroup]="shiptypeanomalySearchForm" noValidate>
+                    <input formControlName="shiptypeanomaly_search_text" id="shiptypeanomaly_search" type="text"
+                        class="form-control" placeholder="Search by mmsi" (keypress)="onlyNumberKey($event)"
+                        (ngModelChange)="getSearchResultForShipTypeAnomaly($event)" maxlength='9' autocomplete="off" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="border-box shipTypeAnomalies">
+                <table class="table table-responsive anomaly-info-table sortShipTypeAnomalies" matSort
+                    (matSortChange)="sortShipTypeAnomaliesData($event)">
+                    <tbody>
+                        <tr class="heading">
+                            <th></th>
+                            <th mat-sort-header="mmsi">MMSI</th>
+                            <th mat-sort-header="trajid">Trajectory ID</th>
+                            <th mat-sort-header="category">Category</th>
+                        </tr>
+                        <tr
+                            *ngFor="let s of shipTypeAnomalysortedData | paginate: { itemsPerPage: itemsPerPage, currentPage: shiptypecurrentPage, id: 'shipTypeAnomalyPaginator'  };">
+                            <td><input type="checkbox" [checked]=selectedShipType[s.traj_id] [value]="s.traj_id"
+                                    (change)="shipTypeAnomalyCheckboxChange($event)" /></td>
+                            <td>{{s.mmsi}}</td>
+                            <td>{{s.traj_id}}</td>
+                            <td>{{s.category}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <pagination-controls (pageChange)="setshipTypeAnomalyOffset($event)" id="shipTypeAnomalyPaginator"
+                *ngIf="totalShipTypeAnomalies > 0">
+            </pagination-controls>
+        </div>
+        <div class="col-xl-9 ">
+            <div class="border-box">
+                <div id="shiptypeanomalymap" class="shiptypeanomaly-map"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Trajectory shiptype popup -->
+<div id="shipTypeAnomalytrajhover" class="ol-popup-hover" style="display: none;">
+</div>

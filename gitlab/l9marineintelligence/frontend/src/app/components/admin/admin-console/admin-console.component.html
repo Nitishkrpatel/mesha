@@ -1,0 +1,32 @@
+<div id="admin-console">
+    <app-main-navbar></app-main-navbar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sidenav col-md-2">
+                <div class="admin-profile">
+                    <img src="assets/admin-img/admin.png" alt="admin_img">
+                    <p class="admin-username">{{ userName }}</p>
+                    <p class="admin-userid">{{ role }}</p>
+                </div>
+                <!-- <p>Admin Console</p> -->
+                <div class="admin-feature">
+                    <ul class="admin-console">
+                        <li id={{a.img}} *ngFor="let a of adminConsoleData" routerLink={{a.routePath}}
+                            routerLinkActive="active">
+                            <img id={{a.img}}_img style="margin-right: 10px;"
+                                src='{{"assets/admin-img/admin-console/" + a.img + ".svg"}}' width="20px" />
+                            {{ a.name }}
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="componentDetails col-md-10" style="min-height: calc(100vh - 60px);">
+                <router-outlet></router-outlet>
+
+            </div>
+        </div>
+    </div>
+
+</div>

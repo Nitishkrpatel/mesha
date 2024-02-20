@@ -1,0 +1,21 @@
+/* DataTable.css */
+
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-header {
+  background-color: #f2f2f2;
+}
+
+.table-cell,
+.table-header {
+  padding: 10px;
+  text-align: left;
+}
+
+.table-row {
+  border-bottom: 1px solid #ddd;
+}

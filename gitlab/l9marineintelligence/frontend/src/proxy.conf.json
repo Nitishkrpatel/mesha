@@ -1,0 +1,9 @@
+{
+    "/api": {
+      "target": "http://192.168.31.249:5000",
+      "secure": false,
+      "changeOrigin": true,
+      "withCredentials": true
+    }
+  }
+  

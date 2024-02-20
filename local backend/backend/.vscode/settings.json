@@ -1,0 +1,10 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "cornflakes.linter.run": "onType",
+    "cornflakes.linter.executablePath": "/home/muralidhara/virtual_env/venv/bin/flake8",
+    "python.linting.flake8Args": [
+        "--max-line-length=99",
+        "--ignore=E402,F841,F401,E302,E305,W503,W504",
+    ],
+}

@@ -1,0 +1,88 @@
+.shipcountBg {
+    background-color: #e1f6ff;
+}
+
+.total-ship-count {
+    font-family: "Charlie Text";
+    color: #174C83;
+    padding-top: 2px;
+}
+
+.sub-title {
+    margin-bottom: 5px;
+}
+
+.title {
+    font-family: "CharlieText-Bold";
+    color: #174C83;
+}
+
+.ship-count {
+    font-family: "CharlieText-Bold";
+    color: #174C83;
+    padding: 2px;
+    font-size: 25px;
+}
+
+#highcharts {
+    padding: 10px;
+}
+
+#container {
+    padding: 5px;
+}
+
+::ng-deep .highcharts-credits {
+    display: none;
+}
+
+.country {
+    font-family: "Charlie Text";
+    color: #174C83;
+}
+
+#neighbouringcountryshipdata {
+    width: 95%;
+}
+
+#neighbouringcountryshipdata td {
+    font-family: "Charlie Text";
+    color: #174C83;
+    text-align: center;
+}
+
+.country_btn{
+    width: 118px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #174C83;
+}
+
+.chartButton{
+    margin:10px;
+    color: white;
+    border: none;
+    width: 5px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#chartButton{
+    display: none;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+
+@media screen and (max-width:1200px) {
+    #neighbouringcountryshipdata {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .highcharts {
+        margin-left: 0em !important;
+        margin-top: 10px !important;
+    }
+}

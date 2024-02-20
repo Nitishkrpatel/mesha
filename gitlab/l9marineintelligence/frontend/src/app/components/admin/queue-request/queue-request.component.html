@@ -1,0 +1,211 @@
+<div id="queue-request">
+    <div class='row'>
+        <div class="col-xl-6">
+            <h1 class="admin-title">
+                Queue Requests
+            </h1>
+        </div>
+        <div class="col-xl-6">
+            <ul class="nav nav-underline">
+                <li class="nav-item" id="account_creation">
+                    <a class="nav-link active" aria-current="page" data-bs-toggle="pill" href="#account">Account
+                        Creation <span class="querequest-count">{{accountCreationCnt}}</span></a>
+                </li>
+                <li class="nav-item" id="password_forgot">
+                    <a class="nav-link" data-bs-toggle="pill" href="#password">Forgot Password <span
+                            class="querequest-count">{{forgotPasswordCnt}}</span></a>
+                </li>
+                <li class="nav-item" id="username_forgot">
+                    <a class="nav-link" data-bs-toggle="pill" href="#username">Forgot Username <span
+                            class="querequest-count">{{forgotUsernameCnt}}</span></a>
+                </li>
+            </ul>
+        </div>
+        <hr>
+    </div>
+
+    <div class="tab-content">
+        <div id="account" class="p-0 tab-pane active">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="sub_admin_title">ACCOUNT CREATION REQUESTS</h2>
+                </div>
+            </div>
+            <div class="row allReqst" *ngFor="let qr of newActCreationRequests">
+                <div class="col-sm-1">
+                    <img src="assets/admin-img/Icon.svg" alt="notificationImg" class="notificationImg">
+                </div>
+                <div class="col-sm-7 col-md-7">
+                    <span class="content">
+                        <span class="bold">{{qr.name}}</span>
+                        has requested for a new account creation.</span>
+                    <p>
+                        {{qr.request_date}} days ago
+                    </p>
+                </div>
+                <div class="col-sm-2 col-md-2 col-l-1 col-xl-1">
+                    <button class="btn adminconsolebtn approve-btn" (click)="openRoleSelectModel(qr.request_id)"><img
+                            src="assets/admin-img/tick.svg" alt="tick" style="margin-right: 5px" width="14"
+                            height="14">Approve</button>
+                </div>
+                <div class="col-sm-2 col-md-2 col-l-1 col-xl-1">
+                    <button class="btn adminconsolebtn decline-btn" (click)="declineNewUserRequest(qr.request_id)"><img
+                            src="assets/admin-img/close.svg" alt="close" style="margin-right: 5px" width="14"
+                            height="14">Decline</button>
+                </div>
+                <hr />
+            </div>
+        </div>
+        <div id="password" class="p-0 tab-pane fade">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="sub_admin_title">FORGOT PASSWORD REQUESTS</h2>
+                </div>
+            </div>
+            <div class="row allReqst" *ngFor="let fp of forgotPasswordDetails">
+                <div class="col-sm-1">
+                    <img src="assets/admin-img/Icon.svg" alt="notificationImg" class="notificationImg">
+                </div>
+                <div class="col-sm-7">
+                    <span class="content">
+                        <span class="bold">{{fp.name}}</span>
+                        has requested for a account password reset.</span>
+                    <p>
+                        {{fp.request_date}} days ago
+                    </p>
+                </div>
+                <div class="col-sm-2 ">
+                    <button class="btn adminconsolebtn approve-btn" (click)="createTemPwd(fp.request_id,'create')"><img
+                            src="assets/admin-img/tick.svg" alt="tick" style="margin-right: 5px" width="14"
+                            height="14">Approve</button>
+                </div>
+                <div class="col-sm-1 ">
+                    <button class="btn adminconsolebtn decline-btn" (click)="declineCreateTemPwdModel(fp.request_id,'decline')"><img
+                            src="assets/admin-img/close.svg" alt="close" style="margin-right: 5px" width="14"
+                            height="14">Decline</button>
+                </div>
+                <hr />
+            </div>
+        </div>
+        <div id="username" class="p-0 tab-pane fade">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="sub_admin_title">FORGOT USERNAME REQUESTS</h2>
+                </div>
+            </div>
+            <div class="row allReqst" *ngFor="let fu of forgotUsernameDetails; let i = index">
+                <div class="col-sm-1">
+                    <img src="assets/admin-img/Icon.svg" alt="notificationImg" class="notificationImg">
+                </div>
+                <div class="col-sm-7">
+                    <span class="content">
+                        <span class="bold">{{fu.name}}</span>
+                        has requested to retrieve the username.
+                    </span>
+                    <p>
+                        {{fu.request_date}} days ago
+                    </p>
+                </div>
+                <div class="col-sm-1">
+                    <p *ngIf="usernameVisibility[i]" class="bold">{{ usernames[i] }}</p>
+                </div>
+                <div class="col-sm-1">
+                    <img [src]="usernameVisibility[i] ? 'assets/admin-img/switch-on.svg' : 'assets/admin-img/switch-off.svg'"
+                        alt="Image" (click)="processUsernameRequest(fu.request_id, true, i)"
+                        matTooltip="Show/Hide Username">
+                </div>
+                <div class="col-sm-1">
+                    <img src="assets/admin-img/delete.svg" alt="tick" style="margin-right: 5px" width="24" height="24"
+                        (click)="processUsernameRequest(fu.request_id, false, i)" matTooltip="Delete Username Request">
+                </div>
+                <hr />
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- model for role selection for user -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary display-none" data-bs-toggle="modal" data-bs-target="#selectroleModal"
+    id="openrolemodel">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="selectroleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form [formGroup]="selectRoleForm">
+
+                    <div style="margin-left:2em;" class="form-group">
+                        Select Roles* :
+                        <div *ngFor='let r of allRoles'>
+                            <label>
+                                <input formControlName="role" id="role_{{r.role_id}}" type="radio" [value]="r.role_id"
+                                    class="form-check-input changeroles radio" />
+                                {{ r.role_name }}
+                            </label><br />
+                        </div>
+
+                        <div class="red" *ngIf="rolesubmitted && r.role.invalid &&  r.role.errors.required">Select
+                            atleast one role.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary roleBtn"
+                        (click)="submitSelectedRoles()">ADD</button><br>
+                    <button type="button" class="btn btn-dark roleBtn" data-bs-dismiss="modal"
+                        id="cancelModel">CANCEL</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- model for creating temperory password for user -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary display-none" data-bs-toggle="modal" data-bs-target="#createTemPwdModal"
+    id="opencreateTemPwdModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createTemPwdModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-m modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form [formGroup]="createTempPwdForm">
+
+                    <div class="form-group">
+                        <h2>Create Temporary Password *</h2>
+                        <mat-form-field appearance="outline">
+                            <input maxlength='12' type="password" id="temp-password" formControlName="temp_pwd"
+                                [ngClass]="{ 'is-invalid': createTempPwdFormSubmit && t.temp_pwd.invalid }" matInput
+                                placeholder="Password *">
+                            <mat-icon matSuffix class="showPassword" (click)="showPassword()">
+                                <img src='{{"../../../../assets/login/" + pwdicon +".svg"}}' alt="password" />
+                            </mat-icon>
+                            <mat-hint class="danger" *ngIf="createTempPwdFormSubmit && t.temp_pwd.errors?.required">
+                                password is
+                                required.
+                            </mat-hint>
+                            <mat-hint class="danger" *ngIf="t.temp_pwd.errors?.minlength">
+                                password should be atleast 6 characters.
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <p class="note"><b>Note:</b> Password must be atleast 6-12 characters long and can contain
+                        numbers or special character.</p>
+                    <button type="submit" class="btn btn-primary roleBtn" (click)="submitTempPwd()">SUBMIT</button><br>
+                    <button type="button" class="btn btn-dark roleBtn" data-bs-dismiss="modal"
+                        id="cancelTempPwdModel">CANCEL</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

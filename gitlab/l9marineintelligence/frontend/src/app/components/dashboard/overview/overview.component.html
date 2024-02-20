@@ -1,0 +1,169 @@
+<div id="overview container-fluid" *ngIf="showOverview === true" style="margin-left:30px">
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-xl-3 h-100">
+      <div class="row border-box shipcountBg py-2" style="margin-bottom: 17px;">
+        <div class="total-ship-count col-xl-4">
+          <p class="sub-title">Total Number of</p>
+          <p class="title">
+            <img src="assets/images/World_Map_Icon.svg" alt="" width="30px" class="mx-2">
+            Ships
+          </p>
+        </div>
+        <div class="col-xl-8 text-end">
+          <p class="ship-count">{{shipCount}}</p>
+        </div>
+      </div>
+      <div class="row border-box shipcountBg py-2" style="margin-bottom: 25px;">
+        <div class="total-ship-count col-xl-8">
+          <p class="sub-title">Total Number of</p>
+          <p class="title">
+            <img src="assets/flags/india.svg" alt="" width="20px" class="mx-2">
+            Indian origin ships
+          </p>
+        </div>
+        <div class="col-xl-4 text-end">
+          <p class="ship-count">{{indianShipsCount}}</p>
+        </div>
+      </div>
+      <div class="row border-box shipcountBg py-2" style="margin-bottom: 25px;">
+        <div class="total-ship-count col-xl-8">
+          <p class="sub-title">Total Number of</p>
+          <p class="title">Neighbouring country ships</p>
+        </div>
+        <div class="col-xl-4 text-end">
+          <p class="ship-count">{{totalneighbouringcountryshipcount}}</p>
+        </div>
+        <ul class="d-flex flex-wrap">
+          <li *ngFor="let country of neighbouringcountryshipdata" class="btn btn-light btn-lg mx-2 my-1 country_btn">
+            {{country.count}} <img src="{{'assets/flags/' + country.origin_country.toLowerCase() + '.svg'}}"
+              class="neighbouringCountriesImg" width="20px" class="mx-2" matTooltip={{country.origin_country}}></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xl-5 h-100">
+      <div class="row border-box highcharts" style="margin-left: 2em;">
+        <div id="highcharts"></div>
+      </div>
+    </div>
+    <div class="col-xl-4 h-100">
+      <div class="row border-box highcharts" style="margin-left: 2em;">
+        <div id="container" style="height: 422px;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row border-box highcharts">
+    <div class="col-xl-3">
+      <div class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;">
+        <div class="total-ship-count col-xl-9">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            At least one type of  Anomaly
+          </p>
+        </div>
+        <div class="col-xl-3 text-end">
+          <p class="ship-count">{{atLeastOneMMSI}}</p>
+        </div>
+      </div>
+      <div id={{vennChartData?.[0]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[0]?.name)">
+        <div class="total-ship-count col-xl-9">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Transmission Anomaly
+          </p>
+          
+        </div>
+        <div class="col-xl-3 text-end">
+          <p class="ship-count">{{vennChartData?.[0]?.value}} </p>
+        </div>
+      </div>
+      <div id={{vennChartData?.[1]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[1]?.name)">
+        <div class="total-ship-count col-xl-9">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Speed Anomaly
+          </p>
+        </div>
+        <div class="col-xl-3 text-end">
+          <p class="ship-count">{{vennChartData?.[1]?.value}}</p>
+        </div>
+      </div>
+      <div id={{vennChartData?.[2]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[2]?.name)">
+        <div class="total-ship-count col-xl-9">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Ship Type Anomaly
+          </p>
+        </div>
+        <div class="col-xl-3 text-end">
+          <p class="ship-count">{{vennChartData?.[2]?.value}}</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-xl-6 border-box my-3">
+      <div id="vennchart"></div>
+    </div>
+    <div class="col-xl-3">
+      <div id={{vennChartData?.[3]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[3]?.name)">
+        <div class="total-ship-count col-xl-10">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Transmission & Speed Anomaly
+          </p>
+        </div>
+        <div class="col-xl-2 text-end">
+          <p class="ship-count">{{vennChartData?.[3]?.value}}</p>
+        </div>
+      </div>
+      <div id={{vennChartData?.[4]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[4]?.name)">
+        <div class="total-ship-count col-xl-10">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Transmission & Ship Type Anomaly
+          </p>
+        </div>
+        <div class="col-xl-2 text-end">
+          <p class="ship-count">{{vennChartData?.[4]?.value}}</p>
+        </div>
+      </div>
+      <div id={{vennChartData?.[5]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[5]?.name)">
+        <div class="total-ship-count col-xl-10">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Speed & Ship Type Anomaly
+          </p>
+        </div>
+        <div class="col-xl-2 text-end">
+          <p class="ship-count">{{vennChartData?.[5]?.value}}</p>
+        </div>
+      </div>
+      <div id={{vennChartData?.[6]?.name}} class="row border-box shipcountBg py-2 mx-3 my-3 anomaly_btn" style="margin-bottom: 17px;" matTooltip="Click for more details"
+      matTooltipPosition='right' (click)="getAnomalyDetails(vennChartData?.[6]?.name)">
+        <div class="total-ship-count col-xl-10">
+          <p class="sub-title">Number of MMSI with</p>
+          <p class="title">
+            <img src="assets/soi/anomalyRed.svg" alt="" width="30px" class="mx-2">
+            Transmission, Speed & Ship Type Anomaly
+          </p>
+        </div>
+        <div class="col-xl-2 text-end">
+          <p class="ship-count">{{vennChartData?.[6]?.value}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

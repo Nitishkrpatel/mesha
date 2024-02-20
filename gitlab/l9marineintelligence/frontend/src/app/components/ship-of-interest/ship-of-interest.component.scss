@@ -1,0 +1,151 @@
+.soi {
+    height: calc(100vh - 60px);
+    padding: 1em;
+}
+
+.soi h3 {
+    font-family: Charlie Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.shipname {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: white;
+}
+
+.accordian,
+.bottom-expansion {
+    background-color: #123D69 !important;
+    color: white !important;
+}
+
+.soiAccordian {
+    margin-top: 1px;
+}
+
+.soi-header {
+    font-family: CharlieText-Bold;
+    // color: white !important;
+}
+
+.soi_scroll {
+    max-height: 12em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+// SOI
+
+.trackinfo-panel {
+    /* left: 30em; */
+    bottom: 0;
+    position: fixed;
+    font-family: Charlie Text !important;
+    left: 58%;
+    transform: translate(-50%, 0%);
+}
+
+#Track-expansion {
+    width: 67em;
+    bottom: 0;
+    margin-left: 15px;
+    // overflow-y: scroll;
+}
+
+#Track-expansion {
+    color: white;
+    background-color: #0E2E4F;
+    opacity: 0.8 !important;
+}
+
+.trackinfoheading {
+    font-family: CharlieText-Bold;
+}
+
+.trackinfodetails {
+    font-family: Charlie Text;
+    font-size: 12px;
+}
+
+.trackinfoindex {
+    font-family: Charlie Text;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+.trackandanomaly-header {
+    font-size: 17px;
+    font-family: CharlieText-Bold;
+}
+
+.trackandanomaly .nav-pills {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.anomalyinfo .nav-pills {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.trackandanomaly .nav-pills .nav-link.active,
+.anomalyinfo .nav-pills .nav-link.active {
+    background-color: transparent;
+    border-radius: 0px;
+    font-family: CharlieText-Bold;
+    border-bottom: 3px solid !important;
+}
+
+.nav-link {
+    color: white;
+}
+
+.px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.dotted_wrap {
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.goi_scroll_limits {
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.width100 {
+    width: 100%
+}
+
+.disable {
+    display: none;
+}
+
+.center-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}

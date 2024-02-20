@@ -1,0 +1,424 @@
+.roi {
+    height: calc(100vh - 60px);
+    padding: 1em;
+}
+
+.roi h3 {
+    font-family: Charlie Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.region_select_heading {
+    font-family: Charlie Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    // line-height: 20px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    margin-top: 25px;
+}
+
+.roi .markarea {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 2px !important;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    /* Adjust the gap as needed */
+}
+
+.button-container .btn {
+    flex: 1;
+}
+
+
+.markarea select {
+    background-color: #1598FF;
+    color: #FFFFFF;
+    height: 40px;
+    border: none;
+    border-radius: 2px !important;
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+.regionname {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: white;
+}
+
+.scroll {
+    max-height: 30em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.roi .regionlist {
+    margin-top: 1em;
+    padding: 1em;
+}
+
+.roipoint {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #827D7D;
+}
+
+.regionname {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: white;
+}
+
+.scroll {
+    max-height: 30em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.dotted_wrap {
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+#roi::placeholder {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    font-feature-settings: 'titl' on, 'case' on, 'ordn' on;
+    color: #686464;
+}
+
+
+.roipannel {
+    z-index: 1000;
+    bottom: 0;
+    position: fixed;
+    font-family: Charlie Text !important;
+    left: 58%;
+    transform: translate(-50%, 0%);
+    opacity: 0.8 !important;
+}
+
+.roipannel #roipannel-header {
+    width: 75em;
+    height: auto;
+    bottom: 0;
+    margin-left: 15px;
+
+}
+
+.roipannelheader {
+    font-size: 20px;
+    font-family: CharlieText-Bold;
+}
+
+.roibutton-pannel :host ::ng-deep .mat-expansion-indicator::before {
+    transform: rotate(180deg) !important;
+}
+
+.roicategorypannelheader {
+    font-size: 16px;
+    font-family: CharlieText-Bold;
+}
+
+.selectedtimelinecriteria {
+    font-family: CharlieText-Bold;
+    align-items: center;
+    font-size: 16px;
+}
+
+.roiName {
+    margin: 0px;
+}
+
+:host ::ng-deep .ngx-slider-tick-legend {
+    color: white !important;
+}
+
+:host ::ng-deep .ngx-slider-tick-value {
+    opacity: 0.1;
+}
+
+#shiptypedeviation-pannel {
+    background-color: #123D69;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.roipannelsubheader {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 26px;
+    color: white;
+    margin-left: 0.5em;
+}
+
+.divider-line {
+    border: 1px solid #FFFFFF;
+}
+
+.showtraj {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-size: 10px;
+    text-transform: uppercase;
+    line-height: 26px;
+    color: white;
+}
+
+.roiinfopannel .roishipinfo {
+    padding: 1em;
+}
+
+.roiinfopannel .shipname,
+.shipname {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+    margin-left: 2px;
+}
+
+
+
+.roiinfopannel .shipcountheading {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: #9B9797;
+}
+
+.roiinfopannel .shipcount {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+}
+
+.roishipdetialinfo {
+    margin: 12px;
+}
+
+.roiinfopannel {
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.roiinfomainpannel {
+    max-height: 42em;
+    overflow-y: auto;
+}
+
+.roitimelinepannel {
+    max-height: 42em;
+    overflow-y: auto;
+    margin: 5px;
+}
+
+.roicharts {
+    margin: 10px;
+}
+
+.scroll-limit-roi {
+    max-height: 42em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.timelineinfo_category,
+.timelineinfo_category_active {
+    border-radius: 4px;
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.timelineinfo_category:focus,
+.timelineinfo_category_active:focus {
+    box-shadow: none !important;
+}
+
+.timelineinfo_category:hover,
+.timelineinfo_category_active:hover {
+    color: white !important;
+}
+
+.trackandanomaly-header {
+    font-size: 20px;
+    font-family: CharlieText-Bold;
+}
+
+.trackandanomaly .nav-pills {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.anomalyinfo .nav-pills {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 5px;
+}
+
+.trackandanomaly .nav-pills .nav-link.active,
+.anomalyinfo .nav-pills .nav-link.active {
+    background-color: transparent;
+    border-radius: 0px;
+    font-family: CharlieText-Bold;
+    border-bottom: 3px solid !important;
+}
+
+.anomalyNextBtn {
+    margin-top: 9px;
+    height: 30px;
+    font-size: 14px;
+    color: #FFBE3D;
+    font-weight: bold;
+    box-shadow: none;
+}
+
+.anomalyPrevBtn {
+    margin-top: 9px;
+    height: 30px;
+    font-size: 14px;
+    color: #FFBE3D;
+    font-weight: bold;
+    box-shadow: none;
+}
+
+mat-label {
+    font-size: 17px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+:host ::ng-deep .mat-icon-button {
+    color: #FFFFFF;
+}
+
+.roi .regionlist,
+.roistatsbackground {
+    background: #0E2E4F;
+}
+
+.roipannel #roipannel-header,
+.roibutton-pannel {
+    background-color: #0E2E4F;
+}
+
+.roiinfopannel {
+    background: #123D69;
+}
+
+.timelineinfo_category,
+.tracks_category {
+    background-color: #0E2E4F;
+    border: 1px solid #117ACC;
+    color: #FFFFFF;
+}
+
+.no_tracks {
+    background: #117ACC;
+}
+
+.timelineinfo_category_active {
+    background-color: #1598FF;
+    border: 1px solid #117ACC;
+    color: #FFBE3D;
+}
+
+.nav-link {
+    color: white;
+}
+
+::ng-deep .date_picker .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .date_picker .mat-form-field-wrapper {
+    background-color: #1598FF;
+    padding-bottom: 0em;
+}
+
+.reset_button{
+    background-color: #1598FF;
+    display: flex;
+    align-items: center;
+    padding: 7px;
+}
+
+.date_picker{
+    display: flex;
+}
+
+.date_picker input {
+    display: none;
+}
+
+.date_picker .mat-form-field {
+    width:87% !important;
+}
+
+.center-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.goitrack{
+    background-color: #174C83 !important;
+    color: #FFFFFF;
+}

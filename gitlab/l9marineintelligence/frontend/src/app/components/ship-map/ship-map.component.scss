@@ -1,0 +1,380 @@
+.mapBtn {
+  position: fixed;
+  z-index: 1000;
+  bottom: 5em;
+  right: 3em;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.mapBtn button {
+  margin-top: 5px;
+  background: #091E34;
+  border: none;
+  color: white;
+}
+
+.popover,
+.popover-body,
+.mat-tooltip {
+  background-color: #174C83 !important;
+}
+
+::ng-deep .popover,
+::ng-deep .popover-body {
+  background-color: #174C83 !important;
+}
+
+.map-popover-buttom {
+  background-color: #174C83 !important;
+}
+
+// popup css
+
+#popup-table {
+  font-family: Charlie Text;
+  color: black !important;
+}
+
+#popup-content #ship_name {
+  font-family: CharlieDisplay-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  margin-bottom: 0px;
+}
+
+#popup-content #ship_mmsi {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+#popup-content #ship-category,
+#popup-content #country {
+  font-family: CharlieText-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  padding-left: 5px;
+}
+
+.navrow .nav-pills {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.navrow .nav-pills .nav-link.active,
+.navrow .nav-pills .show>.nav-link {
+  background-color: transparent;
+  border-bottom: 2px solid black;
+  border-radius: 0px;
+  font-family: CharlieText-Bold;
+}
+
+.nav-link {
+  text-decoration: none !important;
+}
+
+.fav img {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.table-striped {
+  width: 100%;
+}
+
+#overview h5 {
+  font-family: CharlieText-Bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  margin: 8px 0px;
+}
+
+#overview h4 {
+  font-family: CharlieText-Bold;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 4px 0px;
+}
+
+#overview p {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  margin: 4px 0px;
+}
+
+.padding-20px {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+
+.popup-footer {
+  font-family: CharlieText-Bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-left: -15px !important;
+  margin-right: -15px !important;
+  margin-bottom: -15px !important;
+}
+
+.popup-footer .b1 {
+  border-radius: 0px 0px 0px 10px !important;
+  padding: 15px 0px;
+}
+
+.popup-footer .b2 {
+  border-radius: 0px 0px 10px 0px !important;
+  padding: 15px 0px;
+}
+
+.togroup {
+  overflow-y: auto;
+  max-height: 150px;
+}
+
+#imageColors,
+.defaultshipImg {
+  fill: #45709C;
+}
+
+#arrowImage {
+  fill: #0E2E4F;
+}
+
+#strokecolor {
+  stroke: #0D5B99;
+  stroke-width: 2;
+}
+
+.activeImg,
+.activeshipImg {
+  fill: #FFBE3D !important;
+}
+
+.btn-dark {
+  background: #1598FF !important;
+}
+
+
+#popup-content #ship_name,
+#popup-content #ship-category,
+#popup-content #country,
+.navrow .nav-pills .nav-link,
+.createheader {
+  color: #123D69 !important;
+}
+
+#popup-content #ship_mmsi,
+.roiinfopannel .shipcountheading {
+  color: #117ACC !important;
+}
+
+.fav,
+.select-search select option {
+  background-color: #7494B5;
+}
+
+.navrow {
+  background: #D1DBE6;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#overview h5 {
+  color: #123D69;
+}
+
+#overview h4,
+.addfav,
+.togroup {
+  color: #45709C;
+}
+
+#overview p {
+  color: #1598FF;
+}
+
+.font-black h5 {
+  color: #117ACC !important;
+}
+
+.popup-footer {
+  color: #FFFFFF;
+}
+
+.popup-footer .b2 {
+  background: #0D5B99;
+  border: 1px solid white !important;
+}
+
+.popup-footer .b1 {
+  background: #0D5B99;
+  border: 1px solid white !important;
+}
+
+.fav-content:hover,
+.togroup-ele:hover {
+  background-color: #D1DBE6;
+}
+
+.popover,
+.popover-body,
+.mat-tooltip {
+  background-color: #174C83 !important;
+}
+
+::ng-deep .popover,
+::ng-deep .popover-body {
+  background-color: #174C83 !important;
+}
+
+.popover-color {
+  background-color: #174C83 !important;
+}
+
+.nav-link.active {
+  color: #174C83 !important;
+  border-bottom: 3px solid #174C83;
+}
+
+.tableheader {
+  font-family: CharlieText-Bold;
+  color: #117ACC !important;
+}
+
+.popupheader {
+  font-family: CharlieText-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.popupheader img {
+  padding-right: 0.5em;
+}
+
+.popoverul {
+  padding-left: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.popoverul li {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #FFFFFF;
+  list-style-type: none;
+}
+
+.popoverul li img {
+  padding-right: 0.5em;
+}
+
+.popoverul li input {
+  vertical-align: bottom;
+}
+
+::ng-deep .popover,
+::ng-deep .popover-body {
+  width: 180px !important;
+  color: white !important;
+  border-radius: 10px !important;
+}
+
+::ng-deep .popover-arrow {
+  display: none !important;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  background-color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  background-color: transparent !important;
+  border-color: #FFBE3D !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #FFBE3D !important;
+}
+
+.check-box-styling {
+  height: 20px;
+  width: 20px;
+  margin: 0px;
+  position: unset;
+  margin-right: 0.5em;
+}
+
+.collapse-sidenav {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  top: 10px;
+  height: 33px;
+  padding: 5px;
+}
+
+.fav-content:hover,
+.togroup-ele:hover {
+  background-color: #D1DBE6;
+}
+
+.addfav-btn:hover {
+  cursor: pointer;
+}
+
+.center-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.coordinates {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #343232;
+}
+
+.roipoint {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #827D7D;
+}
+
+.roiBtn{
+  width: 100% !important;
+}

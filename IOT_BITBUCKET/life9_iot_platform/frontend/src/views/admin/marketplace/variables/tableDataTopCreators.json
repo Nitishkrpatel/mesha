@@ -1,0 +1,83 @@
+[
+  {
+    "device": "admin1",
+    "macid": "34:86:5D:5E:8B:A4",
+    "serialnumber": "1",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 6:50 PM",
+    "actions": "actions for bmc"
+  },
+  {
+    "device": "2",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "Life9",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "evb",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "Life9",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "Life9",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "Life9",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "Life9",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  },
+  {
+    "device": "Life9",
+    "macid": "34:83:5D:5E:8B:A7",
+    "serialnumber": "2",
+    "solutions": "BMC",
+    "status": "onboarded",
+    "date": "9/22/23, 7:50 PM",
+    "actions": "actions for Life9"
+  }
+]

@@ -1,0 +1,420 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+@font-face {
+  font-family: "CharlieDisplay-Bold";
+  src: local("CharlieDisplay-Bold"), url(./assets/fonts/CharlieDisplay-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "CharlieDisplay-Light";
+  src: local("CharlieDisplay-Light"), url(./assets/fonts/CharlieDisplay-Light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Charlie Display";
+  src: local("Charlie Display"), url(./assets/fonts/CharlieDisplay-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "CharlieText-Bold";
+  src: local("CharlieText-Bold"), url(./assets/fonts/CharlieText-Bold.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Charlie Text";
+  src: local("CharlieText-Regular"), url(./assets/fonts/CharlieText-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Digital Numbers";
+  src: local("Digital Numbers"), url(./assets/fonts/DS-DIGIB.ttf.TTF) format("truetype");
+}
+
+body,
+html {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  // font-size: 62.5%;
+}
+
+.container-fluid {
+  padding: 0px !important;
+}
+
+// map elements
+.map {
+  width: auto;
+  height: calc(100vh - 60px) !important;
+}
+
+.is-invalid {
+  border: 2px solid red;
+}
+
+.invalid-feedback,
+.danger,
+.red {
+  color: red !important;
+}
+
+.active_text {
+  color: #FFBE3D !important;
+}
+
+.mat-tooltip {
+  background-color: darkblue !important;
+  color: #FFBE3D !important;
+  font-size: 15px !important;
+  font-weight: bold;
+}
+
+.mat-form-field {
+  width: 100% !important;
+}
+
+.ol-zoom {
+  display: none;
+}
+
+.ol-attribution.ol-uncollapsible {
+  display: none;
+}
+
+.activeImg {
+  fill: #FFBE3D !important;
+}
+
+.bold {
+  font-weight: bolder !important;
+}
+
+.active {
+  color: #FFBE3D !important;
+}
+
+.navbar-toggler {
+  color: white !important;
+}
+
+.display-none {
+  display: none !important;
+}
+
+
+.ol-popup {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+  min-width: 350px;
+}
+
+.ol-popup-hover {
+  position: absolute;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  min-width: 220px;
+}
+
+.ol-popup:after,
+.ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.ol-popup:after,
+.ol-popup-hover:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 48px;
+  margin-left: -10px;
+}
+
+.ol-popup:before,
+.ol-popup-hover:before {
+  border-top-color: #cccccc;
+  border-width: 11px;
+  left: 48px;
+  margin-left: -11px;
+}
+
+.ol-popup-closer {
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  cursor: pointer;
+}
+
+#imageColors {
+  fill: #45709C;
+}
+
+#imageEditColors {
+  fill: #FFBE3D;
+}
+
+#imageDeleteColors {
+  fill: #D0312d;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after {
+  color: #e0e0e0 !important;
+}
+
+.mat-expansion-panel-header-title {
+  color: white !important;
+}
+
+
+.mat-expanded .mat-expansion-panel-header-title,
+.mat-expanded>.mat-expansion-indicator::after {
+  color: #FFBE3D !important;
+}
+
+.mat-expanded .active-images {
+  fill: #FFBE3D !important;
+}
+
+//   popup
+.addfav {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  left: 350px;
+  width: 204px !important;
+  // height: 120px;
+  font-size: 12px;
+  font-family: Charlie Text;
+  cursor: pointer;
+  display: block;
+  line-height: 2;
+}
+
+.togroup {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  left: 570px;
+  top: 165px;
+  width: 204px !important;
+  font-size: 12px;
+  font-family: Charlie Text;
+  cursor: pointer;
+  display: block;
+}
+
+.soi,
+.roi,.vf{
+  background: #174C83 !important;
+  opacity: 0.8 !important;
+}
+
+.activebg {
+  background-color: #afd2ec !important;
+}
+
+.togroup::-webkit-scrollbar-thumb,
+.scroll_soi::-webkit-scrollbar-thumb,
+.roiinfomainpannel::-webkit-scrollbar-thumb,
+.trackinfopanel::-webkit-scrollbar-thumb,
+.scroll::-webkit-scrollbar-thumb,
+.roitimelinepannel::-webkit-scrollbar-thumb {
+  background: #0D5B99 !important;
+  border-radius: 10px !important;
+}
+
+.soi_scroll::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+.soi_scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #117ACC !important;
+  border-radius: 10px !important;
+}
+
+.soi_scroll::-webkit-scrollbar-thumb {
+  background: white !important;
+  border-radius: 10px !important;
+}
+
+.roi_scroll::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+.roi_scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white !important;
+  border-radius: 10px !important;
+}
+
+.roi_scroll::-webkit-scrollbar-thumb {
+  background: white !important;
+  border-radius: 10px !important;
+}
+
+.btn-dark {
+  background: #1598FF !important;
+}
+
+.btn-light {
+  background: #FFFFFF !important;
+  border: 1px solid #CDCBCB !important;
+  border-radius: 8px !important;
+}
+
+.add-button,
+.cancel-button {
+  border-radius: 4px !important;
+  font-family: CharlieText-Bold;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 16px 0px;
+  padding: 12px;
+}
+
+.cancel-button {
+  margin-left: 5px;
+  border: 1px solid gray !important;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none !important;
+}
+
+.example-card {
+  color: white !important;
+  background-color: #123D69 !important;
+}
+
+#trackinfo-header {
+  padding: 10px 5px;
+  font-family: CharlieText-Bold;
+}
+
+#trackinfo-content {
+  padding: 25px !important;
+  margin: 5px !important;
+  background: #0E2E4F !important;
+}
+
+#trackinfo-subcontent {
+  padding: 25px !important;
+  background: #123D69 !important;
+  margin: 5px !important;
+}
+
+#trackinfo-firstrow {
+  padding-bottom: 15px;
+}
+
+.example-card {
+  color: white;
+  background-color: #4E4B4B;
+  padding: 5px !important;
+  margin: 10px !important;
+}
+
+.trackinfoheading {
+  color: #1598FF;
+}
+
+.trackinfodetails {
+  color: white;
+}
+
+.trackandanomaly .nav-pills,
+.anomalyinfo .nav-pills {
+  color: white !important;
+}
+
+.selected-markarea-button,
+.active-btn {
+  color: #FFBE3D !important;
+}
+
+.border-box {
+  box-shadow: 0px 1px 4px #37c6ff;
+  border-radius: 15px;
+}
+
+.ngx-pagination {
+  text-align: center !important;
+}
+
+.ngx-pagination a {
+  color: #117ACC !important;
+}
+
+// roi
+
+#markarea-color,
+#markpolygon-color{
+  background-color: #1598FF;
+  color: #FFFFFF;
+}
+
+#roipannel-header>mat-expansion-panel-header>.mat-expansion-indicator::after {
+
+  transform: rotate(225deg) !important;
+  margin-right: 10px;
+}
+
+#roipannel-header>mat-expansion-panel-header.mat-expanded>.mat-expansion-indicator {
+  transform: rotate(180deg) !important;
+  margin-right: 10px;
+  margin-top: 47px;
+  height: 5px !important;
+  padding: 0px !important;
+}
+
+#roipannel-header>.mat-expanded .mat-expansion-panel-header-title {
+  display: none;
+}
+
+.tableheader {
+  font-family: CharlieText-Bold ;
+  color: #117ACC!important;
+}
+.tablecontent {
+  color: #117ACC!important;
+}
+
+.dashboard-table .heading {
+  background-color: #174C83 !important;
+}
+
+.vf-search {
+  border-bottom: 1px solid #45709C !important;
+}
+
+::ng-deep .mat-select-arrow {
+  color: red !important; /* Change this to the desired color */
+}

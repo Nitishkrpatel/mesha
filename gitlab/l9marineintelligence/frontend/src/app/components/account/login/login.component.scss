@@ -1,0 +1,70 @@
+.applicationName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    flex-direction: column;
+}
+
+.logo{
+    margin-bottom: 20px;
+}
+
+.loginForm{
+    min-height: 100%;
+    padding: 50px;
+}
+.loginPageImg img{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.mat-form-field {
+    width:100% !important;
+}
+
+.forgot-password a{
+    text-decoration: none;
+    color: black ;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.forgot-password {
+    text-align: right;
+  }
+
+.sendRequest{
+    margin-top: 50px;
+}
+
+.signInBtn{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #CDCBCB;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    background: #E6E5E5;
+    border-radius: 4px;
+    order: 2;
+    margin: 3em 0px;
+    border: none;
+}
+
+.sendRequest a{
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.btnEnabled{
+    background:black;
+    color: white;
+}

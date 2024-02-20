@@ -1,0 +1,114 @@
+.navbar {
+    background-color: white !important;
+    padding: 0px;
+    margin: 1rem 0;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.logo {
+    font-family: Charlie Display;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    color: #343232;
+}
+
+.sign-in {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #343232;
+}
+
+.sign-in a {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #343232;
+}
+
+.navbar-expand-lg {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sign-in a {
+    color: black;
+    font-weight: bold;
+}
+
+.forgot-username a {
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.forgot-username {
+    text-align: right;
+}
+
+.success_message {
+    text-align: center;
+}
+
+li {
+    list-style: none;
+}
+
+.security-note {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 28px;
+    color: #827D7D;
+
+}
+
+.securityQueAns {
+    border: 1px solid #CDCBCB;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.securityQueAns input {
+    border: none;
+    border-bottom: 2px dashed #CDCBCB;
+}
+
+.success_message {
+    text-align: center;
+}
+
+.signInBtn {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 24px;
+    background: black;
+    border-radius: 4px;
+    order: 2;
+    margin: 3em 0px;
+    border: none;
+}
+
+.btnEnabled {
+    background: black;
+    color: white;
+}

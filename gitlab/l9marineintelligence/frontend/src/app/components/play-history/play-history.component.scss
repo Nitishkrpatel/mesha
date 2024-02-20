@@ -1,0 +1,468 @@
+.map {
+  width: auto;
+  height: calc(100vh - 60px) !important;
+}
+
+.mapBtn {
+  position: fixed;
+  z-index: 1000;
+  bottom: 5em;
+  right: 3em;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.mapBtn button {
+  margin-top: 5px;
+  background: #091E34;
+  border: none;
+  color: white;
+}
+
+.popover,
+.popover-body,
+.mat-tooltip {
+  background-color: #174C83 !important;
+}
+
+::ng-deep .popover-arrow {
+  display: none !important;
+}
+
+::ng-deep .popover,
+::ng-deep .popover-body {
+  background-color: #174C83 !important;
+}
+
+.popover-color {
+  background-color: #174C83 !important;
+}
+
+.popupheader {
+  font-family: CharlieText-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  color: white;
+}
+
+.popupheader img {
+  padding-right: 0.5em;
+}
+
+.popoverul {
+  padding-left: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.popoverul li {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: #FFFFFF;
+  list-style-type: none;
+}
+
+.popoverul li img {
+  padding-right: 0.5em;
+}
+
+.popoverul li input {
+  vertical-align: bottom;
+}
+
+::ng-deep .popover,
+::ng-deep .popover-body {
+  width: 180px !important;
+  color: white !important;
+  border-radius: 10px !important;
+}
+
+::ng-deep .popover-arrow {
+  display: none !important;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  background-color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  background-color: transparent !important;
+  border-color: #FFBE3D !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #FFBE3D !important;
+}
+
+.check-box-styling {
+  height: 20px;
+  width: 20px;
+  margin: 0px;
+  position: unset;
+  margin-right: 0.5em;
+}
+
+.center-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+#play_hist {
+  height: calc(100vh - 60px);
+  padding: 1em;
+  top: 60px;
+  // display: block;
+  position: fixed;
+  z-index: 1;
+  width: 280px;
+  background: #174C83 !important;
+  opacity: 0.8 !important;
+  transition: none !important;
+}
+
+#play_hist h3 {
+  font-family: Charlie Display;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.ph-accordion {
+  color: white;
+  margin-bottom: 10px !important;
+  margin-top: 15px !important;
+  background-color: #123D69;
+}
+
+.pannel-expansion {
+  width: 15em;
+  bottom: 0;
+  margin: 0px;
+  background-color: #123D69;
+  color: white;
+}
+
+.header {
+  font-family: CharlieText-Bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  padding: 20px;
+}
+
+.input-group {
+  // align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.input-search input:hover,
+.input-search input:active,
+.input-search input:focus,
+.input-fromdate input:focus,
+.input-duration input:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: none !important;
+}
+
+.input-group-addon {
+  margin-right: 10px;
+}
+
+.mat-expansion-panel {
+  max-height: 500px;
+}
+
+.ol-popup-search-playhistory {
+  position: fixed;
+  width: 290px;
+  height: 250px;
+  border-radius: 5px;
+  background-color: #123D69;
+  z-index: 1000;
+  left: 300px;
+}
+
+.ol-popup-search-closer-playhistory {
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 8px;
+  color: white;
+}
+
+
+.search-result h5 {
+  font-family: CharlieText-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  margin: 16px;
+}
+
+.search-result ul {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-left: 10px;
+}
+
+.search-result li {
+  list-style-type: none;
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0px 5px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.select-search select {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin-left: 5px;
+  color: white;
+  font-family: CharlieText-Bold;
+  font-size: 12px;
+}
+
+
+.select-search select:hover,
+.select-search select:active,
+.select-search select:focus {
+  box-shadow: none !important;
+}
+
+.playhistory,
+.addToList,
+.vesselname {
+  font-family: CharlieText-Bold;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 10px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0px 2px;
+  line-break: anywhere;
+}
+
+.vesselname {
+  font-size: 10px !important;
+}
+
+.vesselname-border {
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 5px;
+  border: 2px solid #45709C !important;
+  align-items: center;
+}
+
+.historylist p {
+  font-family: CharlieText-bold;
+  font-size: 10px;
+  line-height: 10px;
+  text-transform: uppercase;
+  margin: 18px 0px;
+}
+
+.historyList_button {
+  border-radius: 4px;
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px;
+  color: white;
+  border: 2px solid #45709C !important;
+  align-items: center;
+}
+
+.historyList_button:focus,
+.historyList_button_active:focus {
+  box-shadow: none !important;
+}
+
+
+.clearOption {
+  margin-left: 10px;
+}
+
+.historyList_button_active {
+  background: white;
+  border: 1px solid #686464;
+  color: black;
+  border-radius: 4px;
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 5px;
+}
+
+.timeframe-label {
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
+  color: #FFFFFF;
+  margin-right: 5px;
+  font-family: CharlieText-Bold;
+  font-size: 12px;
+}
+
+.input-fromdate,
+.input-duration {
+  padding-left: 0.5em;
+  border-radius: 5px;
+  border: 2px solid #ffffff !important;
+  align-items: center;
+}
+
+
+
+.input-fromdate input,
+.input-duration input {
+  font-family: Charlie Text;
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  color: white;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.margin-bottom-10px {
+  margin-bottom: 10px;
+}
+
+.speed select {
+  font-family: Charlie Text;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0px;
+}
+
+.speed .form-control:focus {
+  background-color: transparent !important;
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+.ship_types,
+.label {
+  font-family: Charlie Text;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
+}
+
+.input-search,
+.select-search {
+  /* border: 1px solid #B4B1B1; */
+  border-radius: 5px;
+  padding: 0.5em;
+  border: 2px solid #ffffff !important;
+  align-items: center;
+  margin-bottom: 0.5em;
+  font-family: CharlieText-Bold;
+  font-size: 12px;
+}
+
+.input-search input {
+  font-family: Charlie Text;
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin-left: 5px;
+  color: white;
+  /* // width: 8em; */
+}
+
+.input-search input::placeholder {
+  color: white;
+  font-family: CharlieText-Bold;
+  font-size: 12px;
+}
+
+.input-fromdate input::placeholder {
+  color: grey !important;
+  margin-left: 5px;
+}
+
+
+::ng-deep .suggestions-container,
+::ng-deep .not-found {
+  width: 200% !important;
+}
+
+.input-search select {
+  background-color: transparent !important;
+  border: none;
+  border-left: 1px solid #B4B1B1;
+  border-radius: 0px;
+  color: white !important;
+  padding: 0px;
+}
+
+.input-search select option {
+  color: black;
+}
+
+.speed {
+  background: #0E2E4F !important;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.speed select {
+  font-family: Charlie Text;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0px;
+  background: #0E2E4F;
+}
+
+select option {
+  color: black;
+  background-color: transparent;
+  font-family: Charlie Text;
+}
+
+select {
+  -webkit-appearance: auto;
+  appearance: auto;
+}
+
+::ng-deep .mat-slider-horizontal .mat-slider-track-wrapper,
+::ng-deep .mat-slider:not(.mat-slider-disabled):not(.mat-slider-sliding) .mat-slider-thumb {
+  background-color: #FFFFFF;
+}

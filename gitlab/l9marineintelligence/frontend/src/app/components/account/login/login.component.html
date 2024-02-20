@@ -1,0 +1,59 @@
+<div class="login">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-4 loginForm">
+                <h2 class="applicationName text-uppercase text-center"> <img src="assets/images/logo1.png" alt="logo" class="logo">marine intelligence</h2>
+                <form [formGroup]="loginForm" noValidate (ngSubmit)="logIn()">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input type="text" onkeydown="return /[a-zA-Z0-9-_]/i.test(event.key)" id="userid"
+                            formControlName="userid" [ngClass]="{ 'is-invalid': submitted && lf.userid.invalid }"
+                            matInput placeholder="Enter your username">
+                        <mat-icon matSuffix><img src='assets/login/username.svg'
+                                alt="username" /></mat-icon>
+                        <mat-hint class="danger" *ngIf="submitted && lf.userid.errors?.required">Username is required.
+                        </mat-hint>
+                        <mat-hint class="danger" *ngIf="lf.userid.errors?.pattern">Special Characters not allowed.
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type="password" id="password" formControlName="password"
+                            [ngClass]="{ 'is-invalid': submitted && lf.password.invalid }" matInput
+                            placeholder="Enter your password" autocomplete="off">
+                        <mat-icon matSuffix class="showPassword" (click)="showPassword()">
+                            <img src='{{"../../../../assets/login/" + pwdicon +".svg"}}'
+                                alt="password" />
+                        </mat-icon>
+                        <mat-hint class="danger" *ngIf="submitted && lf.password.errors?.required">Password is required.
+                        </mat-hint>
+                    </mat-form-field>
+                    <p class="forgot-password"><a routerLink="/Forgot-password">FORGOT PASSWORD?</a></p>
+
+
+                    <button mat-flat-button class="signInBtn" type="submit"
+                        [ngClass]="{'btnEnabled' : loginForm.valid}">
+                        <mat-icon matSuffix>
+                            <img
+                                [src]="loginForm.valid? '../../../../assets/login/signin-after.svg' : '../../../../assets/login/signin-before.svg' "
+                                alt="password" />
+                        </mat-icon>
+                        SIGN IN
+                    </button>
+
+                </form>
+                <p class='sendRequest'><span>Don't have an account yet? </span>
+                    <a routerLink="/Register">SEND REQUEST <img src='assets/login/arrow.svg'
+                        alt="arrow" width="17px" /></a>
+                </p>
+            </div>
+            <div class="col-xl-8" style="padding: 0%;">
+                <div class="loginPageImg">
+                    <img src="assets/login/ship2.png" alt="loginImage">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

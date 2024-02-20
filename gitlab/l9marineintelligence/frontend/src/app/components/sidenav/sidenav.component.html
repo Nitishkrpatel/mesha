@@ -1,0 +1,82 @@
+<div id="sidenav">
+  <div class="role-features">
+    <mat-list-item class="toggle-button" (click)="toggleFirstSidenav()" matTooltip="Toggle sidebar"
+      matTooltipPosition='right' style="padding: 0px 15px;">
+      <mat-icon class="text-white" *ngIf="!isExpanded" mat-list-icon>
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="imageColors"
+            d="M2 0.75C1.30964 0.75 0.75 1.30964 0.75 2C0.75 2.69036 1.30964 3.25 2 3.25H20C20.6904 3.25 21.25 2.69036 21.25 2C21.25 1.30964 20.6904 0.75 20 0.75H2Z" />
+          <path id="imageColors"
+            d="M2 6.75C1.30964 6.75 0.75 7.30964 0.75 8C0.75 8.69036 1.30964 9.25 2 9.25H20C20.6904 9.25 21.25 8.69036 21.25 8C21.25 7.30964 20.6904 6.75 20 6.75H2Z" />
+          <path id="imageColors"
+            d="M2 12.75C1.30964 12.75 0.75 13.3096 0.75 14C0.75 14.6904 1.30964 15.25 2 15.25H20C20.6904 15.25 21.25 14.6904 21.25 14C21.25 13.3096 20.6904 12.75 20 12.75H2Z" />
+        </svg>
+      </mat-icon>
+      <mat-icon class="text-white" *ngIf="isExpanded" mat-list-icon>
+        <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+            d="M17.5156 8.28125C17.5156 7.59089 16.956 7.03125 16.2656 7.03125H1.26563C0.57527 7.03125 0.015626 7.59089 0.015626 8.28125C0.015626 8.97161 0.57527 9.53125 1.26563 9.53125H16.2656C16.956 9.53125 17.5156 8.97161 17.5156 8.28125Z" />
+          <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+            d="M8.18857 1.3583C7.70042 0.870149 6.90896 0.870149 6.4208 1.3583L0.381742 7.39737C-0.106414 7.88552 -0.106414 8.67698 0.381742 9.16513L6.4208 15.2042C6.90896 15.6924 7.70042 15.6924 8.18857 15.2042C8.67673 14.716 8.67673 13.9246 8.18857 13.4364L3.03339 8.28125L8.18857 3.12607C8.67673 2.63792 8.67673 1.84646 8.18857 1.3583Z" />
+        </svg>
+      </mat-icon>
+      <h6 mat-line *ngIf="isExpanded" class="text-white">Menu</h6>
+    </mat-list-item>
+
+    <mat-list-item id={{f.featurename}} class="changefeature" routerLinkActive="active-list-item" matTooltip={{f.featurename}}
+      matTooltipPosition='right' *ngFor="let f of rolefeatures" (click)="changeFeature(f.featurename)" style="padding: 0px 15px;cursor: pointer">
+      <mat-icon mat-list-icon>
+        <img id={{f.featurename}}_img
+          src='{{"assets/side-nav/" + f.featurelink + ".svg"}}' width="20px">
+
+      </mat-icon>
+      <h6 mat-line *ngIf="isExpanded" style="color: white;" id={{f.featurename}}_name>{{ f.featurename }}</h6>
+    </mat-list-item>
+  </div>
+  <div class="footer">
+    <mat-list-item matTooltip="Zoom Level" matTooltipPosition='right'>
+      <mat-icon mat-list-icon style="padding-left: 5px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="imageColors"
+            d="M8.16658 4.62501C7.59129 4.62501 7.12492 5.09138 7.12492 5.66668V7.12501H5.66658C5.09129 7.12501 4.62492 7.59138 4.62492 8.16668C4.62492 8.74197 5.09129 9.20834 5.66658 9.20834H7.12492V10.6667C7.12492 11.242 7.59129 11.7083 8.16658 11.7083C8.74188 11.7083 9.20825 11.242 9.20825 10.6667V9.20834H10.6666C11.2419 9.20834 11.7083 8.74197 11.7083 8.16668C11.7083 7.59138 11.2419 7.12501 10.6666 7.12501H9.20825V5.66668C9.20825 5.09138 8.74188 4.62501 8.16658 4.62501Z" />
+          <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+            d="M8.16658 0.458344C3.90939 0.458344 0.458252 3.90948 0.458252 8.16668C0.458252 12.4239 3.90939 15.875 8.16658 15.875C9.91919 15.875 11.536 15.2896 12.8309 14.3041L15.7633 17.2366C16.1701 17.6434 16.8297 17.6434 17.2365 17.2366C17.6433 16.8298 17.6433 16.1702 17.2365 15.7634L14.304 12.831C15.2896 11.5361 15.8749 9.91928 15.8749 8.16668C15.8749 3.90948 12.4238 0.458344 8.16658 0.458344ZM2.54158 8.16668C2.54158 5.06007 5.05998 2.54168 8.16658 2.54168C11.2732 2.54168 13.7916 5.06007 13.7916 8.16668C13.7916 9.67718 13.1967 11.0479 12.2277 12.0588C12.1966 12.0834 12.1668 12.11 12.1383 12.1384C12.1099 12.1669 12.0833 12.1967 12.0587 12.2277C11.0478 13.1968 9.67709 13.7917 8.16658 13.7917C5.05998 13.7917 2.54158 11.2733 2.54158 8.16668Z" />
+        </svg>
+      </mat-icon>
+      <h4 class="vessel_count" mat-line><span *ngIf="isExpanded">Zoom Level: </span> {{zoomLevel}} </h4>
+    </mat-list-item>
+
+    <mat-list-item matTooltip="Vessel Count" matTooltipPosition='right'>
+      <mat-icon mat-list-icon style="padding-left: 5px;">
+        <svg width="18" height="18" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"
+          style="vertical-align: middle;">
+          <path id="imageColors"
+            d="M6 3.875C4.8264 3.875 3.875 4.8264 3.875 6C3.875 7.1736 4.8264 8.125 6 8.125C7.1736 8.125 8.125 7.1736 8.125 6C8.125 4.8264 7.1736 3.875 6 3.875Z" />
+          <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+            d="M6 0.375C2.8934 0.375 0.375 2.8934 0.375 6C0.375 9.1066 2.8934 11.625 6 11.625C9.1066 11.625 11.625 9.1066 11.625 6C11.625 2.8934 9.1066 0.375 6 0.375ZM1.625 6C1.625 3.58375 3.58375 1.625 6 1.625C8.41625 1.625 10.375 3.58375 10.375 6C10.375 8.41625 8.41625 10.375 6 10.375C3.58375 10.375 1.625 8.41625 1.625 6Z" />
+        </svg>
+      </mat-icon>
+      <h4 class="vessel_count" mat-line>{{vesselCount}} <span *ngIf="isExpanded">Ships last known
+          <br />position as on <br />{{this.plotTime}}</span></h4>
+
+    </mat-list-item>
+
+    <mat-list-item id="fullscreen" (click)='fullscreen()' class="fullscreen-btn" matTooltip="Full Screen"
+      matTooltipPosition='right'>
+      <mat-icon mat-list-icon style="cursor: pointer">
+        <svg  width="22" height="22" viewBox="0 0 22 22" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path id="imageColors"
+            d="M4 0.75C3.13805 0.75 2.3114 1.09241 1.7019 1.7019C1.09241 2.3114 0.75 3.13805 0.75 4V7C0.75 7.69036 1.30964 8.25 2 8.25C2.69036 8.25 3.25 7.69036 3.25 7V4C3.25 3.80109 3.32902 3.61032 3.46967 3.46967C3.61032 3.32902 3.80109 3.25 4 3.25H7C7.69036 3.25 8.25 2.69036 8.25 2C8.25 1.30964 7.69036 0.75 7 0.75H4Z" />
+          <path id="imageColors"
+            d="M15 0.75C14.3096 0.75 13.75 1.30964 13.75 2C13.75 2.69036 14.3096 3.25 15 3.25H18C18.1989 3.25 18.3897 3.32902 18.5303 3.46967C18.671 3.61032 18.75 3.80109 18.75 4V7C18.75 7.69036 19.3096 8.25 20 8.25C20.6904 8.25 21.25 7.69036 21.25 7V4C21.25 3.13805 20.9076 2.3114 20.2981 1.7019C19.6886 1.09241 18.862 0.75 18 0.75H15Z" />
+          <path id="imageColors"
+            d="M2 13.75C1.30964 13.75 0.75 14.3096 0.75 15V18C0.75 18.862 1.09241 19.6886 1.7019 20.2981C2.3114 20.9076 3.13805 21.25 4 21.25H7C7.69036 21.25 8.25 20.6904 8.25 20C8.25 19.3096 7.69036 18.75 7 18.75H4C3.80109 18.75 3.61032 18.671 3.46967 18.5303C3.32902 18.3897 3.25 18.1989 3.25 18V15C3.25 14.3096 2.69036 13.75 2 13.75Z" />
+          <path id="imageColors"
+            d="M20 13.75C19.3096 13.75 18.75 14.3096 18.75 15V18C18.75 18.1989 18.671 18.3897 18.5303 18.5303C18.3897 18.671 18.1989 18.75 18 18.75H15C14.3096 18.75 13.75 19.3096 13.75 20C13.75 20.6904 14.3096 21.25 15 21.25H18C18.862 21.25 19.6886 20.9076 20.2981 20.2981C20.9076 19.6886 21.25 18.862 21.25 18V15C21.25 14.3096 20.6904 13.75 20 13.75Z" />
+        </svg>
+      </mat-icon>
+      <h4 class="fullscreen" mat-line *ngIf="isExpanded">Fullscreen</h4>
+    </mat-list-item>
+  </div>
+</div>

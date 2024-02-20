@@ -1,0 +1,93 @@
+.admin-title {
+    margin: 20px 10px;
+    font-family: 'Charlie Display';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    color: #28292C;
+}
+
+.sub_admin_title {
+    margin: 20px 10px;
+    font-family: 'Charlie Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 10px;
+    text-transform: uppercase;
+    color: #174C83;
+}
+
+.notificationImg {
+    margin-left: 10px !important;
+}
+
+.adminconsolebtn {
+    color: #174C83;
+    border: 1px solid #174C83;
+    font-family: 'CharlieText-bold';
+    font-size: 10px;
+    line-height: 10px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: static;
+    width: 104px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    font-weight: 700;
+
+}
+
+.roleBtn {
+    width: 100%;
+    margin-top: 5px;
+    font-weight: 700;
+}
+
+.allReqst {
+    margin-bottom: 20px;
+}
+
+.nav-link.active {
+    color: #174C83 !important;
+    border-bottom: 3px solid #174C83;
+}
+
+.nav-item a {
+    color: #174C83;
+}
+
+.querequest-count {
+    font-family: 'Charlie Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0px 8px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    background: #174C83;
+}
+
+.tab-content .active{
+    color:black !important;
+}
+
+.approve-btn:hover{
+    background-color: #00FF00;
+}
+
+.decline-btn:hover{
+    background-color: red;
+}

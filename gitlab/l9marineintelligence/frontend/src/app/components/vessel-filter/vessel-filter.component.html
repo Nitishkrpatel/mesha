@@ -1,0 +1,259 @@
+<div id="vesselFillter" *ngIf="featureSelectedVF === 'true' && featureSelectedVFSidenav === true" class='vf'>
+  <mat-spinner class="center-spinner" *ngIf="isloading"></mat-spinner>
+  <h3>Vessel Filters <img src="assets/vf/info.png" alt=""  matTooltipPosition='right' style="padding: 0px 15px;" [matTooltip]='info'></h3>
+  <div>
+    <mat-accordion id="addPreset_Section">
+
+      <mat-expansion-panel id="vf-accordion">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="col-2">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="active-images" fill-rule="evenodd" clip-rule="evenodd"
+                  d="M11.3333 0.666654C11.7435 0.66694 12.165 0.940659 12.1658 1.30714L12.1667 2.34186C14.4622 2.52177 15.4885 3.67596 15.4909 6.07476L15.5 13.0962C15.5033 15.7116 13.8602 17.3208 11.2265 17.325L4.79324 17.3333C2.176 17.3366 0.512355 15.6891 0.509064 13.0663L0.500008 6.12723C0.496722 3.71261 1.54293 2.56258 3.83847 2.35186L3.83764 1.31714C3.83682 0.950656 4.25513 0.667174 4.66665 0.666627C5.07834 0.666081 5.49669 0.94899 5.49752 1.31547L5.49834 2.30854L10.5 2.30188L10.4992 1.30881C10.4984 0.942325 10.9222 0.666366 11.3333 0.666654ZM10.5017 3.99335L5.5 4.00001L5.50083 5.03199C5.50083 5.39098 5.076 5.66858 4.66667 5.66668C4.26036 5.66479 3.84095 5.39265 3.84095 5.03366L3.84013 3.99335C3 4.00001 2.16664 4.41668 2.16664 6.12556V8.16668H13.8333V6.08332C13.8333 4.41668 13 3.99335 12.175 4.00001L12.1692 5.02447C12.1692 5.38263 11.7484 5.6654 11.3383 5.66668C10.9271 5.66796 10.5025 5.38429 10.5025 5.02614L10.5017 3.99335ZM3.83333 12.3333C3.83333 12.7936 4.20643 13.1667 4.66667 13.1667C5.1269 13.1667 5.5 12.7936 5.5 12.3333C5.5 11.8731 5.1269 11.5 4.66667 11.5C4.20643 11.5 3.83333 11.8731 3.83333 12.3333ZM8.83333 12.3333C8.83333 11.8731 9.20643 11.5 9.66667 11.5H11.3333C11.7936 11.5 12.1667 11.8731 12.1667 12.3333C12.1667 12.7936 11.7936 13.1667 11.3333 13.1667H9.66667C9.20643 13.1667 8.83333 12.7936 8.83333 12.3333Z"
+                  fill="#FFFFFF" />
+              </svg>
+            </div>
+            <div class="col-10  soi-header">
+              Date & Time
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <form [formGroup]="vesselFilterForm">
+          <div class="paading_negative startend_date">
+            <mat-form-field style="width: 90%;" appearance="outline">
+              <mat-label style="color: white;font-family: CharlieText-Bold;font-size: 14px;">Start Duration</mat-label>
+              <input [max]=today [owlDateTime]="dt2" formControlName="from_date" [owlDateTimeTrigger]="dt2" matInput
+                id="from_date">
+              <mat-icon matSuffix><img class="img-vertical-align" src='../../../assets/vf/datetime.svg'
+                  alt="username" /></mat-icon>
+              <owl-date-time #dt2></owl-date-time>
+            </mat-form-field>
+
+            <mat-form-field style="width: 90%;" appearance="outline">
+              <mat-label style="color: white;font-family: CharlieText-Bold;font-size: 14px;">End Duration</mat-label>
+              <input [max]=today [owlDateTime]="dt3" formControlName="to_date" [owlDateTimeTrigger]="dt3" matInput
+                id="to_date">
+              <mat-icon matSuffix><img class="img-vertical-align" src='../../../assets/vf/datetime.svg'
+                  alt="username" /></mat-icon>
+              <owl-date-time #dt3></owl-date-time>
+            </mat-form-field>
+            <button style="width: 100%;" class="btn vf-add-btn width100" (click)=clearDateTime()>Clear Date &
+              Time</button>
+          </div>
+        </form>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel id="vf-accordion">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="col-2  ">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="active-images" fill-rule="evenodd" clip-rule="evenodd"
+                  d="M6.33335 0.166626C2.9276 0.166626 0.166687 2.92754 0.166687 6.33329C0.166687 9.73905 2.9276 12.5 6.33335 12.5C7.73544 12.5 9.0289 12.0317 10.0648 11.2433L12.4108 13.5892C12.7362 13.9146 13.2638 13.9146 13.5893 13.5892C13.9147 13.2638 13.9147 12.7361 13.5893 12.4107L11.2433 10.0648C12.0317 9.02883 12.5 7.73538 12.5 6.33329C12.5 2.92754 9.73911 0.166626 6.33335 0.166626ZM1.83335 6.33329C1.83335 3.84801 3.84807 1.83329 6.33335 1.83329C8.81863 1.83329 10.8334 3.84801 10.8334 6.33329C10.8334 7.54169 10.3575 8.63828 9.58221 9.44697C9.5574 9.46667 9.53354 9.48793 9.51076 9.5107C9.48799 9.53348 9.46673 9.55734 9.44703 9.58214C8.63834 10.3574 7.54176 10.8333 6.33335 10.8333C3.84807 10.8333 1.83335 8.81857 1.83335 6.33329Z"
+                  fill="#FFFFFF" />
+              </svg>
+            </div>
+            <div class="col-8  soi-header">
+              Search Options
+            </div>
+
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div style="max-height: 340px; overflow-x: hidden; overflow-y: auto;" class="soi_scroll">
+          <label class="vf_search">
+            <input [checked]="selectallsearch" type="checkbox" class="selectallSearch-checkbox checkbox"
+              (change)="onSelectAllSearch($event)" />
+            Select / Clear All
+          </label>
+
+          <div class="row" *ngFor="let s of searchOptions">
+            <div class="col-sm-12 padding-0">
+              <label class="vf_search">
+
+                <input style="margin-left: 1em;" type="checkbox" [checked]=selectedSearch[s.value] [value]="s.value"
+                  class="selectSearch-checkbox checkbox" (change)="searchCheckBoxChange($event)" />
+                <span id={{s.value}}> </span> {{s.name}}
+              </label>
+            </div>
+            <div style="display: none;" id={{s.value}}_inputdiv class="col-sm-12">
+              <div class="input-group vf-search">
+                <span class="input-group-addon">
+                  <img src="../../../assets/vf/search.svg" alt="search" />
+                </span>
+                <form [formGroup]="SearchForm">
+                  <input id={{s.value}}_input type="text" class="form-control search-input" placeholder="Search"
+                    autocomplete="off" (focus)='onSearchFocus()' name={{s.value}}_input
+                    (keydown.enter)='onSearchkeyup(s.value, $event)' formControlName={{s.value}} />
+                </form>
+              </div>
+            </div>
+
+            <div style="display: none;" class="vf_search_result" id={{s.value}}_result>
+              <h5>Search Results</h5>
+              <ul class="soi_scroll" style="padding-left: 10px">
+                <li class="selectOptionInSearchResult" (click)=selectedOption(r.val,r.type)
+                  *ngFor="let r of searchresult">
+                  {{r.val}}
+                </li>
+              </ul>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel id="vf-accordion">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="col-2  ">
+              <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="active-images"
+                  d="M5.65623 0.879153L3.19547 3.82581C2.6363 4.4954 2.14385 5.23381 1.72716 6.02751C0.706029 7.97253 0.166626 10.1981 0.166626 12.4664V16.3333C0.166626 16.8856 0.614342 17.3333 1.16663 17.3333C4.38885 17.3333 7.61107 17.3333 10.8333 17.3333C11.3856 17.3333 11.8333 16.8856 11.8333 16.3333V12.4664C11.8333 10.1981 11.2939 7.97253 10.2728 6.02751C9.85607 5.23381 9.36362 4.4954 8.80445 3.82582L6.34369 0.879153C6.15385 0.595783 5.84607 0.595783 5.65623 0.879153Z"
+                  fill="#FFFFFF" />
+              </svg>
+            </div>
+            <div class="col-10  soi-header">
+              Ship Types
+            </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <label class="vf_ship_types">
+          <input [checked]="selectallvfcat" type="checkbox" class="selectAllCategory-checkbox checkbox"
+            (change)="onSelectAll($event)" />
+          Select / Clear All
+        </label>
+        <div style="max-height: 200px; overflow-y: auto; overflow-x: hidden;" class="soi_scroll">
+          <div class="row" *ngFor="let sc of allCategory">
+            <div class="col-sm-9 padding-0">
+              <label class="vf_ship_types">
+                <input style="margin-left: 1em;" type="checkbox" [checked]=selectedvfcat[sc] [value]="sc"
+                  class="selectCategory-checkbox checkbox" (change)="vfShiptypecheckboxchange($event)" />
+                <span id={{sc}}> </span> {{sc}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel id="vf-accordion">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="col-2  ">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="active-images" fill-rule="evenodd" clip-rule="evenodd"
+                  d="M9.99996 0.416626C9.4467 0.416626 8.99819 0.865135 8.99819 1.4184V2.03888C5.36793 2.4912 2.4912 5.36793 2.03888 8.99819H1.4184C0.865135 8.99819 0.416626 9.4467 0.416626 9.99996C0.416626 10.5532 0.865135 11.0017 1.4184 11.0017H2.03888C2.4912 14.632 5.36793 17.5087 8.99819 17.961V18.5815C8.99819 19.1348 9.4467 19.5833 9.99996 19.5833C10.5532 19.5833 11.0017 19.1348 11.0017 18.5815V17.961C14.632 17.5087 17.5087 14.632 17.961 11.0017H18.5815C19.1348 11.0017 19.5833 10.5532 19.5833 9.99996C19.5833 9.4467 19.1348 8.99819 18.5815 8.99819H17.961C17.5087 5.36793 14.632 2.4912 11.0017 2.03888V1.4184C11.0017 0.865135 10.5532 0.416626 9.99996 0.416626ZM5.31911 8.99819H4.06338C4.48568 6.47654 6.47654 4.48568 8.99819 4.06338V5.31911C8.99819 5.87237 9.4467 6.32088 9.99996 6.32088C10.5532 6.32088 11.0017 5.87237 11.0017 5.31911V4.06338C13.5234 4.48568 15.5142 6.47654 15.9365 8.99819H14.6808C14.1275 8.99819 13.679 9.4467 13.679 9.99996C13.679 10.5532 14.1275 11.0017 14.6808 11.0017H15.9365C15.5142 13.5234 13.5234 15.5142 11.0017 15.9365V14.6808C11.0017 14.1275 10.5532 13.679 9.99996 13.679C9.4467 13.679 8.99819 14.1275 8.99819 14.6808V15.9365C6.47654 15.5142 4.48568 13.5234 4.06338 11.0017H5.31911C5.87237 11.0017 6.32088 10.5532 6.32088 9.99996C6.32088 9.4467 5.87237 8.99819 5.31911 8.99819Z"
+                  fill="#FFFFFF" />
+              </svg>
+            </div>
+            <div class="col-8  soi-header">
+              Extents
+            </div>
+            <div class="col-2 ">
+              <img id="extent-switch" height="20px" (click)="$event.stopPropagation();toggleExtent()"
+                src="../../../assets/vf/switch-offf.svg" class="img-vertical-align-middle toggleExtent" alt="extent" />
+            </div>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+      </mat-expansion-panel>
+      <button id="vf-submit" class="btn VF-submit-btn" (click)='resetFilter()'>
+        <img src="assets/roi/reset.svg" alt="resetBtn" style="padding-right: 10px">
+        Reset Filter</button>
+      <button id="vf-submit" class="btn VF-submit-btn" (click)='submitVF(false)'> View Only</button>
+      <button id="vf-submit" class="btn VF-submit-btn" (click)='$event.stopPropagation();openAddPresetInput(true)'> View
+        & Save</button>
+      <form style="display: none;" id="presetInputform" [formGroup]="AddPresetForm">
+        <mat-form-field appearance="outline">
+          <mat-label style="color: white;font-family: CharlieText-Bold;font-size: 14px;">Preset Name</mat-label>
+          <input type="text" id="pname" formControlName="pname" matInput placeholder="Enter your preset">
+          <mat-icon matSuffix>
+            <a>
+              <img class="img-vertical-align" (click)="$event.stopPropagation();addPreset(true);"
+                src='../../../../assets/vf/check.svg' alt="click" />
+            </a>
+          </mat-icon>
+          <mat-hint class="danger" *ngIf="psubmitted && apf.pname.errors?.required">Preset name is required.
+          </mat-hint>
+
+          <mat-hint class="danger" *ngIf="psubmitted && apf.pname.errors?.duplicate">Preset name already exists.
+          </mat-hint>
+        </mat-form-field>
+      </form>
+      <mat-expansion-panel id="vf-accordion" class="getAllPresets" (click)="getAllPresets()" [expanded]=presetExpanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="col-2  ">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="active-images"
+                  d="M6.73338 12.1867L10.7789 12.1991C11.0311 12.2 11.2353 12.4112 11.2353 12.6702V14.9461C11.2353 15.2059 11.0877 15.441 10.8578 15.5497L7.18555 17.2741C7.09975 17.3138 7.0088 17.3333 6.91785 17.3333C6.79687 17.3333 6.67589 17.2979 6.57036 17.2281C6.38589 17.1061 6.27435 16.8958 6.27435 16.6704V12.6578C6.27435 12.3971 6.48027 12.1859 6.73338 12.1867ZM15.5598 0.666626C16.5396 0.666626 17.3333 1.48417 17.3333 2.4935V3.76976C17.3333 4.2594 17.142 4.7296 16.8022 5.07252L11.3813 10.5558C11.2878 10.6513 11.1608 10.7043 11.0296 10.7034L6.49074 10.6893C6.3526 10.6893 6.22132 10.6301 6.12694 10.5266L1.14539 5.04778C0.837368 4.70927 0.666626 4.26205 0.666626 3.79804V2.49439C0.666626 1.48505 1.46028 0.666626 2.44011 0.666626H15.5598Z"
+                  fill="#FFFFFF" />
+              </svg>
+
+            </div>
+            <div class="col-9  soi-header">
+              My Presets
+            </div>
+          </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div class="presetlist soi_scroll">
+          <mat-radio-group>
+            <div class="row" *ngFor="let p of allPreset">
+              <div class="col-sm-8 word-break">
+                <mat-radio-button (change)="presetSelectionChange(p.pid)" [value]="p.pid">
+                  <span> {{p.pname}}</span>
+                </mat-radio-button>
+              </div>
+              <div class="col-sm-2 ">
+                <a>
+                  <img class="delete-Preset" (click)="$event.stopPropagation();deletePreset(p.pid,p.pname)"
+                    src="../../../assets/vf/delete.svg" alt='delete' />
+                </a>
+
+              </div>
+            </div>
+          </mat-radio-group>
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </div>
+</div>
+
+<mat-accordion *ngIf="featureSelectedVF === 'true' && tracksLength !== 0" class="vfpannel">
+  <mat-expansion-panel id="vfpannel-header">
+    <mat-expansion-panel-header>
+
+      <mat-panel-title class="vfpannelheader">
+        No. of Tracks Retrieved
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="roiinfopannel">
+          <button *ngFor="let t of vesselFilterTrack" style="padding: 0px;" type="button" class="tracks_category">
+            <section style="margin-bottom: 10px; margin-top: 10px;">
+              <span class="" style="padding: 10px;">
+                <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="defaultshipImg"
+                    d="M2.6665 5.66663C1.51429 8.17367 0.957779 11.5609 0.668598 13.4538C0.637498 13.6573 0.961432 13.7506 1.068 13.5712C1.94403 12.0965 5.03687 9.55595 5.85169 9.55595C6.6665 9.55595 9.75934 12.0965 10.6354 13.5712C10.7419 13.7506 11.0659 13.6573 11.0348 13.4538C10.7456 11.5609 10.1521 8.17367 8.99984 5.66663C8.20092 3.92831 6.51143 1.14176 6.00784 0.413864C5.93348 0.306381 5.7699 0.306381 5.69554 0.413864C5.19195 1.14176 3.46542 3.92831 2.6665 5.66663Z"
+                    fill="white" />
+                </svg> {{t.cat}}</span>
+              <span class="no_tracks" style="padding: 10px"> {{t.ct}} Tracks</span>
+            </section>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

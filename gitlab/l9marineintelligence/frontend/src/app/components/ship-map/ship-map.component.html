@@ -1,0 +1,600 @@
+<div id="shipmap">
+    <mat-spinner class="center-spinner" *ngIf="isloading"></mat-spinner>
+    <app-main-navbar (plottimeEvent)="recievePlotTime($event)" (searchShipEvent)="receiveShipSearchResult($event)"
+        (clockstatusEvent)="receiveClockStatus($event)" (speedEvent)="receiveSpeed($event)"></app-main-navbar>
+    <mat-sidenav-container class="example-container">
+        <mat-sidenav mode="side" opened id="sidenav">
+            <app-sidenav (fullscreenEvent)=receiveFullscreen($event)
+                (rolFeaturesEvent)=receiveFeatures($event)></app-sidenav>
+        </mat-sidenav>
+        <mat-sidenav-content style="padding: 0px; overflow: hidden;">
+            <div class="row">
+                <div id="secondnavbar">
+                    <app-ship-of-interest (SOISelectedEvent)=receiveSoiSeletected($event)
+                        (DeleteSOIEvent)=receiveDeleteSoI($event) (EditGOIEvent)=receiveEditGoi($event)
+                        (DeleteGoiEvent)=receiveDeleteGOI($event) (DeleteGOIMMSIEvent)=receiveDeleteGoIMMSI($event)
+                        (removeTrackTrajEvent)=receiveRemoveTrackTraj($event)
+                        (TracktrajectoryEvent)=receiveTrackTraj($event)
+                        (shiptypeanomalytrajectoryEvent)=receiveShipTypeAnomalyTraj($event)
+                        (shiptyptrajanomalyEvent)=receiveShipTypeAnomaly($event)
+                        (removeanomalyTrajEvent)=receiveRemoveAnomalyTraj($event)>
+                    </app-ship-of-interest>
+                    <app-region-of-interest (markareaEvent)=receiveMarkArea($event)
+                        (markPolygonEvent)=receiveMarkPloygon($event) (EditROIEvent)=receiveEditrroI($event)
+                        (DeleteROIEvent)=receiveDeleteRoI($event) (ROISelectedEvent)=receiveRoiSeletected($event)
+                        (markregionEvent)=receiveDrawRegion($event)
+                        (removemarkedregionEvent)=receiveRemoveRegion($event)
+                        (shiptypedeviationtrajectoryEvent)=receiveShipTypeAnomalyTraj($event)
+                        (shiptypedeviaitontrajanomalyEvent)=receiveShipTypeAnomaly($event)
+                        (removeanomalyTrajEvent)=receiveRemoveAnomalyTraj($event)></app-region-of-interest>
+                    <app-vessel-filter (VFSelectedEvent)=receiveVFSeletected($event)
+                    (markextentEvent)=receiveAddExtent($event) (VFSelectedMarkEvent)=receiveVFSeletectedMark($event) (deletePresetEvent)=receiveDeletePreset($event)></app-vessel-filter>
+                </div>
+                <div class="col-12" style="padding: 0px;">
+                    <div id="map" class="map">
+                        <div class="mapBtn">
+                            <button class="btn" (click)="showGraticule()" matTooltip="Show/Hide Graticule"
+                                matTooltipPosition='left'>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path [ngClass]="{ 'activeImg': graticule === true}" fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M5.83333 0.625C5.25804 0.625 4.79167 1.09137 4.79167 1.66667V4.79167H1.66667C1.09137 4.79167 0.625 5.25804 0.625 5.83333C0.625 6.40863 1.09137 6.875 1.66667 6.875H4.79167V13.125H1.66667C1.09137 13.125 0.625 13.5914 0.625 14.1667C0.625 14.742 1.09137 15.2083 1.66667 15.2083H4.79167V18.3333C4.79167 18.9086 5.25804 19.375 5.83333 19.375C6.40863 19.375 6.875 18.9086 6.875 18.3333V15.2083H13.125V18.3333C13.125 18.9086 13.5914 19.375 14.1667 19.375C14.742 19.375 15.2083 18.9086 15.2083 18.3333V15.2083H18.3333C18.9086 15.2083 19.375 14.742 19.375 14.1667C19.375 13.5914 18.9086 13.125 18.3333 13.125H15.2083V6.875H18.3333C18.9086 6.875 19.375 6.40863 19.375 5.83333C19.375 5.25804 18.9086 4.79167 18.3333 4.79167H15.2083V1.66667C15.2083 1.09137 14.742 0.625 14.1667 0.625C13.5914 0.625 13.125 1.09137 13.125 1.66667V4.79167H6.875V1.66667C6.875 1.09137 6.40863 0.625 5.83333 0.625ZM6.875 13.125V6.875H13.125V13.125H6.875Z"
+                                        fill="#45709C" />
+                                </svg>
+                            </button>
+                            <button class="btn" matTooltip="Map type and Layers" matTooltipPosition='left'
+                                [ngbPopover]="maptypeAndLayers" placement="start">
+                                <img src="assets/map/Map.svg" alt="map">
+                            </button>
+                            <button class="btn" (click)="zoomIn()" matTooltip="zoom-in" matTooltipPosition='left'>
+                                <img src="assets/map/zoom-in.svg" alt="zoom-in"
+                                    [ngClass]="{ 'activeImg': graticule === true}">
+                            </button>
+                            <button class="btn" (click)="zoomOut()" matTooltip="zoom-out" matTooltipPosition='left'>
+                                <img src="assets/map/zoom-out.svg" alt="zoom-out"
+                                    [ngClass]="{ 'activeImg': graticule === true}">
+                            </button>
+                            <ng-template #maptypeAndLayers class="map-popover-buttom">
+                                <h4 class='popupheader'><img src="../../../assets/map/map-type.svg" alt="map-type" />map
+                                    types
+                                </h4>
+                                <mat-radio-group>
+                                    <ul class="popoverul">
+                                        <li>
+                                            <mat-radio-button *ngFor="let f of mapoptions"
+                                                [checked]="f.maptype === maptype " (change)="changeMapType(f.maptype)"
+                                                [value]="f.maptype" id={{f.maptype}}>
+                                                <span [ngClass]="{ 'active_text': maptype === f.maptype }">
+                                                    {{f.maptype}}</span>
+                                            </mat-radio-button>
+
+                                        </li>
+                                    </ul>
+                                </mat-radio-group>
+
+                                <h4 class='popupheader' style="margin-top: 15px;"><img
+                                        src="../../../assets/map/layers.svg" alt="layers" />layers</h4>
+                                <ul class="popoverul">
+                                    <li id='Ports' (change)="getPortsData($event)">
+                                        <input type="checkbox" class="form-check-input check-box-styling"
+                                            [checked]="showports" value='Ports'>
+                                        <svg style="margin-right: 0.5em;" width="20" height="20" viewBox="0 0 20 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageColors" [ngClass]="{ 'activeImg': showports === true }"
+                                                d="M14.5807 17.3333C13.7567 17.3333 13.4001 17.0483 12.8611 16.6174C12.2377 16.1197 11.4632 15.5 9.99466 15.5C8.52708 15.5 7.7525 16.1197 7.13008 16.6183C6.592 17.0483 6.23633 17.3333 5.41225 17.3333C4.59 17.3333 4.23433 17.0483 3.69625 16.6183C3.20308 16.2232 2.61553 15.7521 1.66274 15.5735C1.21038 15.4887 0.833496 15.8731 0.833496 16.3333V16.5C0.833496 16.9602 1.22131 17.3024 1.65147 17.4661C1.97712 17.59 2.23178 17.7938 2.55041 18.0483C3.17283 18.547 3.9465 19.1667 5.41225 19.1667C6.87983 19.1667 7.6535 18.547 8.27591 18.0493C8.81491 17.6184 9.17058 17.3333 9.99466 17.3333C10.8197 17.3333 11.1964 17.634 11.7162 18.0493C12.3386 18.547 13.1132 19.1667 14.5807 19.1667C16.0483 19.1667 16.8229 18.547 17.4453 18.0493C17.7556 17.8014 18.0149 17.5943 18.3491 17.4677C18.7794 17.3046 19.1668 16.9602 19.1668 16.5V16.3333C19.1668 15.8731 18.79 15.4888 18.3376 15.5734C17.3834 15.7519 16.7944 16.2229 16.3004 16.6174C15.7614 17.0483 15.4048 17.3333 14.5807 17.3333ZM4.50016 6.79168L4.28373 6.84578C3.39074 7.06903 2.84781 7.97392 3.07106 8.86691L4.50016 14.5833C4.50016 14.5833 5.13083 14.5833 5.41225 14.5833C6.87983 14.5833 7.6535 13.9637 8.27591 13.4659C8.81491 13.0351 9.17058 12.75 9.99466 12.75C10.8197 12.75 11.1964 13.0507 11.7162 13.4659C12.3386 13.9637 13.1132 14.5833 14.5807 14.5833C14.8649 14.5833 15.5002 14.5833 15.5002 14.5833L15.5249 14.4853L16.9293 8.86687C17.1526 7.97389 16.6096 7.06904 15.7166 6.8458L15.5002 6.79168V3.58426C15.5002 3.14609 15.1912 2.77026 14.7632 2.68501L10.9168 1.91593V1.75001C10.9168 1.24375 10.5064 0.833344 10.0002 0.833344C9.4939 0.833344 9.0835 1.24375 9.0835 1.75001V1.91593L5.23716 2.68501C4.80908 2.77026 4.50016 3.14609 4.50016 3.58426V6.79168ZM6.3335 4.33409L10.0002 3.60076L13.6668 4.33409V6.33334L10.0002 5.41668L6.3335 6.33334V4.33409Z" />
+                                        </svg>
+                                        <span [ngClass]="{ 'active_text': showports === true }">Ports</span>
+                                    </li>
+                                    <li id='Anchors' (change)="getAnchorsData($event)">
+                                        <input type="checkbox" class="form-check-input check-box-styling"
+                                            [checked]="showanchors" value='Anchors'>
+                                        <svg style="margin-right: 0.5em;" width="20" height="20" viewBox="0 0 20 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageColors" [ngClass]="{ 'activeImg': showports === true }"
+                                                d="M17.2997 10.9318C16.3664 11.3318 15.4331 11.7401 14.4997 12.1401C14.3497 12.2068 14.2497 12.3318 14.2497 12.4985C14.2414 12.6735 14.3414 12.7985 14.4997 12.8818C14.6497 12.9568 14.7997 13.0318 14.9497 13.0985C15.0497 13.1401 15.0497 13.1818 14.9914 13.2651C14.8081 13.5068 14.5997 13.7235 14.3581 13.9068C13.5497 14.4985 12.6248 14.6735 11.6497 14.7151C11.4664 14.7235 11.4081 14.6818 11.4081 14.4818C11.4164 13.0318 11.4164 11.5735 11.4164 10.1235C11.4164 9.99846 11.4164 9.91512 11.2414 9.91512C10.4164 9.92346 9.59975 9.92346 8.77475 9.91512C8.64142 9.91512 8.60808 9.96512 8.60808 10.0901C8.61642 10.8318 8.60808 11.5735 8.60808 12.3151C8.60808 13.0485 8.60808 13.7901 8.60808 14.5235C8.60808 14.6651 8.56642 14.7235 8.42475 14.7151C7.99975 14.6985 7.57475 14.6651 7.15808 14.5651C6.34142 14.3735 5.62475 14.0151 5.09975 13.3401C4.95808 13.1651 4.96642 13.1568 5.15808 13.0651C5.28308 13.0068 5.39975 12.9485 5.52475 12.8901C5.61642 12.8485 5.69142 12.7818 5.73308 12.6901C5.84142 12.4651 5.74142 12.2485 5.46642 12.1318C4.55808 11.7401 3.65808 11.3401 2.74975 10.9568C2.39142 10.7901 2.09975 10.9818 2.10808 11.3651C2.13308 12.1151 2.16642 12.8735 2.19975 13.6235C2.21642 13.9401 2.22475 14.2568 2.24975 14.5651C2.25808 14.7401 2.34975 14.8568 2.51642 14.9068C2.68308 14.9568 2.83308 14.8985 2.94142 14.7651C2.99142 14.7068 3.03308 14.6485 3.06642 14.5818C3.13308 14.4568 3.18308 14.4818 3.25808 14.5818C3.49142 14.9068 3.75808 15.2068 4.04975 15.4901C5.00808 16.4151 6.16642 16.9901 7.41642 17.4068C7.94142 17.5818 8.48308 17.7401 8.94142 18.0568C9.24975 18.2651 9.53308 18.5068 9.64975 18.8818C9.70808 19.0568 9.80808 19.1651 9.99975 19.1651C10.1997 19.1651 10.2998 19.0485 10.3498 18.8735C10.4081 18.6818 10.5081 18.5318 10.6497 18.3901C10.9747 18.0568 11.3748 17.8401 11.8081 17.6818C12.2664 17.5068 12.7414 17.3651 13.1997 17.1901C14.5997 16.6568 15.7998 15.8568 16.7081 14.6485C16.8414 14.4735 16.8414 14.4735 16.9748 14.6568C17.0664 14.7818 17.1498 14.9151 17.3247 14.9401C17.5914 14.9735 17.7498 14.8068 17.7664 14.4568C17.8164 13.4235 17.8581 12.3985 17.8914 11.3651C17.9081 10.9985 17.6164 10.7985 17.2997 10.9318ZM7.56642 9.04012C7.65808 8.95679 7.74975 8.93179 7.86642 8.93179C9.24142 8.93179 10.6081 8.94012 11.9831 8.93179C12.1748 8.93179 12.3247 8.96512 12.4831 9.09846C13.0581 9.56512 13.8748 9.50679 14.4081 8.99846C14.9414 8.49012 15.0164 7.66512 14.5914 7.07346C14.1581 6.46512 13.3414 6.24846 12.6997 6.61512C12.4331 6.76512 12.1831 6.81512 11.8997 6.79846C11.7914 6.79012 11.6748 6.79012 11.5664 6.79846C11.4331 6.80679 11.3831 6.77346 11.3831 6.62346C11.3914 6.10679 11.3914 5.58179 11.3831 5.06512C11.3831 4.95679 11.4248 4.89846 11.4998 4.83179C12.0581 4.31512 12.3164 3.68179 12.2581 2.92346C12.1497 1.47346 10.6748 0.490122 9.29142 0.948455C8.45808 1.22346 7.92475 1.80679 7.74975 2.66512C7.57475 3.50679 7.83308 4.24012 8.46642 4.82346C8.54975 4.89846 8.59142 4.97346 8.59142 5.09012C8.58308 5.34012 8.59142 5.58179 8.59142 5.83179C8.59142 6.08179 8.58308 6.34012 8.59142 6.59012C8.60808 6.74012 8.57475 6.80679 8.40808 6.79012C8.18308 6.77346 7.96642 6.78179 7.74142 6.79012C7.62475 6.79012 7.53308 6.75679 7.43308 6.69012C6.79142 6.24846 5.92475 6.38179 5.43308 6.99012C4.95808 7.58179 5.00808 8.44846 5.54975 8.97346C6.11642 9.52346 6.98308 9.55679 7.56642 9.04012ZM9.99142 2.46512C10.3247 2.46512 10.5914 2.72346 10.5997 3.05679C10.5997 3.39012 10.3331 3.66512 9.99975 3.65679C9.68308 3.65679 9.40808 3.39012 9.39975 3.07346C9.39142 2.74012 9.65808 2.46512 9.99142 2.46512Z" />
+                                        </svg>
+                                        <span [ngClass]="{ 'active_text': showports === true }">Anchors</span>
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+    <!-- Popup on map -->
+    <div id="popup" class="ol-popup">
+        <a id="popup-closer" class="ol-popup-closer"><b>x</b></a>
+        <div id="popup-content">
+            <h4 id="ship_name"></h4>
+            <p id="ship_mmsi"></p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <span id="ship-cat-img"></span>
+                    <span id="ship-category"></span>
+                </div>
+                <div class="col-sm-6" style="text-align: right;">
+                    <span id="country_flag"></span>
+                    <span id="country"></span>
+                </div>
+            </div>
+
+            <div class="row navrow">
+                <div class="col-sm-10">
+                    <ul class="nav nav-underline">
+                        <li class="nav-item" id="account_creation">
+                            <a class="nav-link active" aria-current="page" data-bs-toggle="pill"
+                                href="#overview">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="pill" href="#tabular">Detail</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-2 fav" *ngIf="roleSoiStatus === 'true'">
+                    <a id="addInterestedShip" class="addfav-btn" (click)="addInterestedShip()">
+                        <img class="heart-img" [src]="getHeartImage()" alt="fav" />
+                    </a>
+                </div>
+
+                <div *ngIf="isIntrested" id="popup-fav" class="addfav">
+                    <div class="row  fav-content addtoSoiBtn" (click)="addShipToSoI()">
+                        <span id="multi-ship">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M10.6933 1.47352L12.4745 3.41832C12.8792 3.86025 13.2356 4.3476 13.5372 4.87144C14.2763 6.15515 14.6668 7.62406 14.6668 9.12111V11.3333C14.6668 11.8855 14.219 12.3333 13.6668 12.3333H13.302C12.7407 12.3333 12.1483 12.1639 12.0001 11.9393C11.8519 11.7147 11.8519 10.4544 11.8519 10.4544C11.8519 8.9574 11.4615 7.48849 10.7224 6.20477C10.4208 5.68093 10.0644 5.19358 9.65963 4.75165L8.42656 3.40527L10.1957 1.47352C10.3331 1.2865 10.5559 1.2865 10.6933 1.47352ZM7.58565 5.75163L5.80452 3.80684C5.66712 3.61981 5.44434 3.61981 5.30693 3.80684L3.52581 5.75163C3.12107 6.19356 2.76463 6.68091 2.46303 7.20475C1.72392 8.48847 1.3335 9.95738 1.3335 11.4544V13.6666C1.3335 14.2189 1.78121 14.6666 2.3335 14.6666H8.77796C9.33024 14.6666 9.77796 14.2189 9.77796 13.6666V11.4544C9.77796 9.95738 9.38753 8.48847 8.64843 7.20475C8.34682 6.68091 7.99038 6.19356 7.58565 5.75163Z" />
+                            </svg>
+                            &nbsp;Add to Individual Ships</span>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row fav-content loadGoiShipsForPopup" (click)="loadGoiShipsForPopup()">
+                        <span id="ship-group">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path [ngClass]="{ 'activeImg': togroup === true }" id="imageColors" fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M7.57448 1.51008C7.15648 0.974749 6.51921 0.659417 5.83648 0.666625H4.67782C2.01583 0.666625 0.666504 2.20674 0.666504 5.24273V10.75C0.666504 13.588 2.41916 15.3334 5.24249 15.3334H10.7498C13.5878 15.3334 15.3331 13.588 15.3331 10.7574V7.18606C15.3404 4.2234 14.0204 2.77874 11.3145 2.77874H9.06314C8.73314 2.77874 8.42514 2.62474 8.21981 2.36808L7.57448 1.51008ZM10.4606 6.21336L9.48102 5.14373C9.40545 5.04086 9.28292 5.04086 9.20735 5.14373L8.23432 6.20618L8.91249 6.94669C9.13509 7.18975 9.33113 7.45779 9.49701 7.7459C9.90351 8.45194 10.1182 9.25984 10.1182 10.0832V10.9332C10.3602 11.1166 10.678 11.1166 10.9158 11.1166H11.1664C11.4425 11.1166 11.6664 10.8927 11.6664 10.6166V9.34988C11.6664 8.52651 11.4516 7.71861 11.0451 7.01257C10.8792 6.72446 10.6832 6.45642 10.4606 6.21336ZM6.79216 6.42706L7.77176 7.49669C7.99436 7.73975 8.1904 8.00779 8.35627 8.2959C8.76278 9.00194 8.9775 9.80984 8.9775 10.6332V11.8999C8.9775 12.176 8.75365 12.3999 8.47751 12.3999H4.83315C4.55701 12.3999 4.33315 12.176 4.33315 11.8999V10.6332C4.33315 9.80984 4.54788 9.00194 4.95438 8.2959C5.12026 8.00779 5.3163 7.73975 5.53889 7.49669L6.51849 6.42706C6.59406 6.32419 6.71659 6.32419 6.79216 6.42706Z" />
+                            </svg>
+                            &nbsp;Add to Existing Ship Group</span>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <div class="row fav-content" (click)="openModeltoAddNewGroup()">
+                        <a>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M7.57448 1.51008C7.15648 0.974749 6.51921 0.659417 5.83648 0.666625H4.67782C2.01583 0.666625 0.666504 2.20674 0.666504 5.24273V10.75C0.666504 13.588 2.41916 15.3334 5.24249 15.3334H10.7498C13.5878 15.3334 15.3331 13.588 15.3331 10.7574V7.18606C15.3404 4.2234 14.0204 2.77874 11.3145 2.77874H9.06314C8.73314 2.77874 8.42514 2.62474 8.21981 2.36808L7.57448 1.51008ZM7.26647 5.79991C7.26647 5.49309 7.59481 5.06962 7.9998 5.06658C8.40788 5.06351 8.74424 5.49309 8.74424 5.79991V7.9999H10.9331C11.2399 7.9999 11.6665 8.32822 11.6665 8.73323C11.6665 9.13824 11.2399 9.46656 10.9331 9.46656H8.73313L8.74424 11.6666C8.74424 11.9734 8.40788 12.403 7.9998 12.3999C7.59481 12.3968 7.26647 11.9734 7.26647 11.6666V9.46656H5.06648C4.75966 9.46656 4.33315 9.13824 4.33315 8.73323C4.33315 8.32822 4.75966 7.9999 5.06648 7.9999H7.26647V5.79991Z" />
+                            </svg>
+                            &nbsp;Add to New Group
+                        </a>
+                    </div>
+
+                    <mat-divider></mat-divider>
+                </div>
+                <div *ngIf="togroup && isIntrested" id="popup-group" class="togroup">
+                    <p *ngIf="goiforpopuplength === '0'"> No Existing Groups</p>
+                    <div class="row" *ngFor="let g of goiforpopup">
+                        <div id={{g.group_name}} (click)="addMMSIToExistingGOI(g)"
+                            class="dotted_wrap addMMSIToExistingGOI" matTooltip={{g.group_name}}>
+                            <img src='{{"../../../assets/popup/" + g.img + ".svg"}}' />
+                            &nbsp;{{g.group_name}}
+                        </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Tab panes -->
+            <div class="tab-content" id="popup_tabContent">
+                <div id="overview" class="container p-0 tab-pane active">
+                    <div class="row padding-20px">
+                        <div class="col-sm-10">
+                            <h5>Destination</h5>
+                            <h4 id="destinationport"> </h4>
+                        </div>
+                        <div class="col-sm-2">
+                            <a matTooltip={{destination}} id="shipdestination"> </a>
+                        </div>
+                    </div>
+
+
+                    <div class="row padding-20px">
+                        <div class="col-sm-8">
+                            <h5>ETA </h5>
+                            <h4 id="shipeta"></h4>
+                        </div>
+                    </div>
+
+                    <div class="row padding-20px" style="border-bottom: 1px dashed black;">
+                        <div class="col-9">
+                            <h5>Predicted Destination:</h5>
+                            <h4 *ngFor="let pd of predictedDestination">
+                                <img src='{{pd.src}}' alt="">{{ pd.port_name }}
+                            </h4>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a id="predictDestination" class="predictDestination" (click)='predictDestination()'>
+                                <svg width="18" height="16" viewBox="0 0 18 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path id="imageColors" [ngClass]="{ 'activeImg': predictdestination === true}"
+                                        fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M10.461 2.55305C9.60546 2.28682 8.70121 2.25809 7.83259 2.46953C6.96397 2.68098 6.15929 3.12571 5.49363 3.76223C4.82798 4.39875 4.32305 5.20631 4.02596 6.10956C3.86929 6.58587 3.38338 6.83536 2.94066 6.66681C2.49793 6.49826 2.26603 5.97549 2.4227 5.49918C2.81563 4.30456 3.48344 3.2365 4.36382 2.39465C5.2442 1.5528 6.30845 0.964607 7.45727 0.684953C8.6061 0.405299 9.80204 0.4433 10.9335 0.795408C12.0606 1.14615 13.0871 1.79717 13.9181 2.68808L15.6325 4.42125V2.14499C15.6325 1.63973 16.0132 1.23014 16.4828 1.23014C16.9525 1.23014 17.3332 1.63973 17.3332 2.14499V6.53625C17.3332 7.0415 16.9525 7.45109 16.4828 7.45109H12.4012C11.9316 7.45109 11.5509 7.0415 11.5509 6.53625C11.5509 6.03099 11.9316 5.6214 12.4012 5.6214H14.3361L12.7441 4.01196C12.7376 4.00542 12.7312 3.99876 12.7249 3.992C12.0954 3.31432 11.3165 2.81928 10.461 2.55305ZM0.666504 9.46375C0.666504 8.9585 1.04721 8.54891 1.51684 8.54891H5.59848C6.06811 8.54891 6.44882 8.9585 6.44882 9.46375C6.44882 9.96901 6.06811 10.3786 5.59848 10.3786H3.66357L5.2556 11.988C5.26208 11.9946 5.26846 12.0012 5.27474 12.008C5.90432 12.6857 6.6832 13.1807 7.5387 13.447C8.39421 13.7132 9.29847 13.7419 10.1671 13.5305C11.0357 13.319 11.8404 12.8743 12.506 12.2378C13.1717 11.6013 13.6766 10.7937 13.9737 9.89044C14.1304 9.41413 14.6163 9.16464 15.059 9.33319C15.5017 9.50174 15.7336 10.0245 15.577 10.5008C15.184 11.6954 14.5162 12.7635 13.6359 13.6054C12.7555 14.4472 11.6912 15.0354 10.5424 15.315C9.39358 15.5947 8.19763 15.5567 7.06615 15.2046C5.93908 14.8539 4.91257 14.2028 4.08161 13.3119L2.36718 11.5787V13.855C2.36718 14.3603 1.98647 14.7699 1.51684 14.7699C1.04721 14.7699 0.666504 14.3603 0.666504 13.855V9.46375Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabular" class="container p-0 tab-pane fade ">
+                    <table class="table-sm table table-striped" id="popup-table">
+                    </table>
+                </div>
+            </div>
+
+            <div class="row popup-footer">
+                <div id="pastTrackDiv" class="col-sm-6 b1"><a id="pastTrack" class="pastTrack"
+                        (click)="pastTrack()">PAST TRACK</a></div>
+                <div class="col-sm-6 b2"><a id="pastRoute" class="predictRoute" data-bs-toggle="modal"
+                        data-bs-target="#routePreModel">PREDICT ROUTE</a></div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End popup on map -->
+
+    <!-- ships popup -->
+    <div id="shipshover" class="ol-popup-hover" style="display: none;">
+    </div>
+
+    <!-- ports popup -->
+    <div id="portshover" class="ol-popup-hover" style="display: none;">
+    </div>
+
+    <!-- anchors popup -->
+    <div id="anchorshover" class="ol-popup-hover" style="display: none;">
+    </div>
+
+    <!-- Trajectory anchors popup -->
+    <div id="trajhover" class="ol-popup-hover" style="display: none;">
+    </div>
+
+    <!-- region popup -->
+    <div id="regionhover" class="ol-popup-hover" style="display: none;">
+    </div>
+
+    <!-- Delete Soi Model -->
+
+    <!-- Button trigger modal -->
+    <button type="button" style="display: none;" id="opensoideleteModel" data-bs-toggle="modal"
+        data-bs-target="#soideleteModel">
+        Open Soi
+        Delete Model
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="soideleteModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Are you sure. Do you want to delete <b>{{deletingSoiShipName}} ({{deletingsoiship}}) </b> from ships
+                    of interest?
+                    <div>
+                        <button type="button" class="btn btn-dark add-button" (click)="deleteSoI()">DELETE</button>
+                        <button class="btn btn-light cancel-button" id="closedeletesoimodel" data-bs-dismiss="modal"
+                            type="button">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete Soi Model -->
+
+    <!--add goi modal -->
+    <button style="display: none;" id="add-to-newgroup" data-bs-toggle="modal" data-bs-target="#goiModel"> add to
+        newgroup</button>
+    <div class="modal fade" id="goiModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        *ngIf=true>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="createheader">Create New Group</h4>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="goiForm">
+                        <div class="form-group">
+                            <input formControlName="group_name" id="group_name" type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': goiFormSubmitted && g.group_name.invalid }"
+                                placeholder="Enter Group Name" autocomplete="off">
+                            <div *ngIf="goiFormSubmitted && g.group_name.invalid" class="invalid-feedback">
+                                <div *ngIf="g.group_name.errors.empty">Enter a valid Group name.</div>
+                                <div *ngIf="g.group_name.errors.required">Group name is required.</div>
+                                <div *ngIf="g.group_name.errors.duplicate">Group name already exists.</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-dark add-button" type="submit" (click)="addShipToGoI()">
+                            CREATE
+                        </button>
+                        <button class="btn btn-light cancel-button" id="closegoiModel" data-bs-dismiss="modal"
+                            type="button" (click)="closeGoiModel()">CANCEL</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end add goi modal -->
+
+    <!--add goi without mmsi modal-->
+    <div class="modal" id="goinewModel" *ngIf=true>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form [formGroup]="goiForm">
+                        <div class="form-group">
+                            <input formControlName="group_name" id="group_name" type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': goiFormSubmitted && g.group_name.invalid }"
+                                placeholder="Enter Group Name" autocomplete="off">
+                            <div *ngIf="goiFormSubmitted && g.group_name.invalid" class="invalid-feedback">
+                                <div *ngIf="g.group_name.errors.empty">Enter a valid Group name.</div>
+                                <div *ngIf="g.group_name.errors.required">Group name is required.</div>
+                                <div *ngIf="g.group_name.errors.duplicate">Group name already exists.</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-dark add-button" type="submit" (click)="addGoIWithoutMMSI()">
+                            CREATE
+                        </button>
+                        <button class="btn btn-light cancel-button" id="closeNewGoiModel" data-bs-dismiss="modal"
+                            type="button" (click)="closeGoiModel()">CANCEL</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end add goi without mmsi modal-->
+    <!-- edit goi Model  -->
+    <button type="button" class="btn btn-primary display-none" id="openEditGoiModel" data-bs-toggle="modal"
+        data-bs-target="#editgoiModel"> Open Edit GOI Model</button>
+    <div class="modal" id="editgoiModel" *ngIf=true>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form [formGroup]="editgoiForm" (ngSubmit)="editGroupName()">
+                        <div class="form-group">
+                            <input formControlName="new_goi" id="new_goi" type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': editgoisubmitted && egf.new_goi.invalid }"
+                                placeholder="Edit group name" autocomplete="off">
+                            <div *ngIf="editgoisubmitted && egf.new_goi.invalid" class="invalid-feedback">
+                                <div *ngIf="egf.new_goi.errors.required">Group name is required.</div>
+                                <div *ngIf="egf.new_goi.errors.samename"> Same Group name.</div>
+                                <div *ngIf="egf.new_goi.errors.duplicate">Group name already exists.</div>
+                                <div *ngIf="egf.new_goi.errors.empty">Enter a valid Group name.</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-dark add-button" type="submit">UPDATE</button>
+                        <button class="btn btn-light cancel-button" id="closeeditgoiModel" data-bs-dismiss="modal"
+                            type="button" (click)="closeEditGoIModel()">CANCEL</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end edit goi Model  -->
+
+    <!-- Delete goi Model -->
+    <button class="display-none" id="openDeleteGoiModel" data-bs-toggle="modal" data-bs-target="#goideleteModel">Open
+        GOI
+        Delete Model</button>
+    <div class="modal" id="goideleteModel" *ngIf=true>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Are you sure. Do you want to delete group <b>{{deletinggoiship}}</b> ?
+                    <div>
+                        <button type="button" class="btn btn-dark add-button" (click)="deleteGoI()">DELETE</button>
+                        <button class="btn btn-light cancel-button" id="closeDeletGoiModel" data-bs-dismiss="modal"
+                            type="button">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete goi Model -->
+
+    <!-- Delete mmsi in goi Model -->
+    <button class="display-none" id="openDeleteMmsiOfGoiModel" data-bs-toggle="modal"
+        data-bs-target="#mmsiofgoideleteModel">open mmsi of goi delete Model</button>
+    <div class="modal" id="mmsiofgoideleteModel" *ngIf=true>
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Are you sure. Do you want to delete <b>{{deletingmmsiofgoi}}</b> from group
+                    <b>{{deletingmmsiofgoiship}}</b> ?
+                    <div>
+                        <button type="button" class="btn btn-dark add-button"
+                            (click)=" deleteMMSIOfGoI()">DELETE</button>
+                        <button class="btn btn-light cancel-button" id="closedeletemmsiofgoimodel"
+                            data-bs-dismiss="modal" type="button">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete mmsi in goi Model -->
+
+    <!-- add roi modal -->
+    <button type="button" class="btn btn-primary display-none" id="openAddROIModel" data-bs-toggle="modal"
+        data-bs-target="#roiModel"> Open Add ROI Model</button>
+    <div class="modal" id="roiModel" *ngIf=true>
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form [formGroup]="regionFrom" (ngSubmit)="AddRegionOfInterest()">
+                        <div class="form-group">
+                            <input formControlName="roi" id="roi" type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': regionsubmitted && r.roi.invalid }"
+                                placeholder="Enter region name" autocomplete="off">
+                            <div *ngIf="regionsubmitted && r.roi.invalid" class="invalid-feedback">
+                                <div *ngIf="r.roi.errors.required">Region name is required.</div>
+                                <div *ngIf="r.roi.errors.duplicate">Region name already exists.</div>
+                                <div *ngIf="r.roi.errors.empty">Enter a valid Region name.</div>
+                            </div>
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-4  roipoint">Point 1: </div>
+                            <div class="col-8 coordinates" id="topLeft"></div>
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-4  roipoint">Point 2: </div>
+                            <div class="col-8  coordinates" id="topRight"></div>
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-4 roipoint">Point 3: </div>
+                            <div class="col-8 coordinates" id="bottomRight"></div>
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-4  roipoint">Point 4: </div>
+                            <div class="col-8  coordinates" id="bottomLeft"></div>
+                        </div>
+                        <button class="btn btn-dark add-button roiBtn my-1" type="submit">ADD</button>
+                        <button class="btn btn-light cancel-button roiBtn  mx-0 my-1" id="closeroimodel"
+                            data-bs-dismiss="modal" type="button" (click)="removeinteraction()">CANCEL</button>
+                    </form>
+                    <p id="topLeftCoord" class="display-none"> </p>
+                    <p id="topRightCoord" class="display-none"> </p>
+                    <p id="bottomRightCoord" class="display-none"> </p>
+                    <p id="bottomLeftCoord" class="display-none"> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end add roi modal -->
+    <!-- add roi polygon modal -->
+    <button type="button" class="btn btn-primary display-none" id="openAddROIPolygonModel" data-bs-toggle="modal"
+        data-bs-target="#roiPloyonModel"> Open Add ROI Model</button>
+    <div class="modal" id="roiPloyonModel" *ngIf=true>
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form [formGroup]="regionFrom" (ngSubmit)="AddPolygonRegionOfInterest()">
+                        <div class="form-group">
+                            <input formControlName="roi" id="roi" type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': regionsubmitted && r.roi.invalid }"
+                                placeholder="Enter region name" autocomplete="off">
+                            <div *ngIf="regionsubmitted && r.roi.invalid" class="invalid-feedback">
+                                <div *ngIf="r.roi.errors.required">Region name is required.</div>
+                                <div *ngIf="r.roi.errors.duplicate">Region name already exists.</div>
+                                <div *ngIf="r.roi.errors.empty">Enter a valid Region name.</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-dark add-button roiBtn my-1" type="submit">ADD</button>
+                        <button class="btn btn-light cancel-button roiBtn mx-0  my-1" id="closepolygonroimodel"
+                            data-bs-dismiss="modal" type="button" (click)="removeinteraction()">CANCEL</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- edit roi model  -->
+    <button type="button" class="btn btn-primary display-none" id="openEditROIModel" data-bs-toggle="modal"
+        data-bs-target="#editroiModel"> open Edit ROI Model</button>
+    <div class="modal" id="editroiModel" *ngIf=true>
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form [formGroup]="editregionForm" (ngSubmit)="editRoI()">
+                        <div class="form-group">
+                            <input formControlName="new_roi" id="new_roi" type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': editregionsubmitted && er.new_roi.invalid }"
+                                placeholder="Edit region name" autocomplete="off">
+                            <div *ngIf="editregionsubmitted && er.new_roi.invalid" class="invalid-feedback">
+                                <div *ngIf="er.new_roi.errors.required">Region name is required.</div>
+                                <div *ngIf="er.new_roi.errors.samename"> Same region name.</div>
+                                <div *ngIf="er.new_roi.errors.duplicate">Region name already exists.</div>
+                                <div *ngIf="er.new_roi.errors.empty">Enter a valid Region name.</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-dark add-button roiBtn my-1" type="submit">UPDATE</button>
+                        <button class="btn btn-light cancel-button roiBtn mx-0 my-1" id="closeeditroiModel"
+                            data-bs-dismiss="modal" type="button" (click)="closeEditRoIModel()">CANCEL</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end edit roi model  -->
+
+    <!-- Delete Roi Model -->
+    <button class="display-none" id="openroideleteModel" data-bs-toggle="modal" data-bs-target="#roideleteModel">open
+        roi
+        delete Model</button>
+    <div class="modal" id="roideleteModel" *ngIf=true>
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Are you sure. Do you want to delete <b> {{deletingregionname}} </b> from Region of Interest?
+                    <div>
+                        <button type="button" class="btn btn-dark roiBtn add-button my-1"
+                            (click)="deleteRoI()">DELETE</button>
+                        <button class="btn btn-light cancel-button roiBtn my-1 mx-0" id="closedeleteroimodel"
+                            data-bs-dismiss="modal" type="button">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Delete Roi Model -->
+
+      <!-- Delete preset Model -->
+      <button class="display-none" id="openDeletePresetModel" data-bs-toggle="modal" data-bs-target="#presetdeleteModel">open roi
+        delete Model</button>
+      <div class="modal" id="presetdeleteModel" *ngIf=true>
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              Are you sure. Do you want to delete <b> {{deletingPresetName}} </b> from Preset?
+              <div>
+                <button type="button" class="btn btn-dark add-button" (click)="deletePreset()">DELETE</button>
+                <button class="btn btn-light cancel-button" id="closedeletepresetmodel" data-bs-dismiss="modal"
+                  type="button">CANCEL</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Delete preset Model -->
+
+      <!-- model for Route input Time -->
+
+  <div class="modal" id="routePreModel" *ngIf=true>
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form [formGroup]="routePredictionTimeFrom" (ngSubmit)="predictRoute()">
+            <div class="form-group">
+              <label for="predictionTime">Prediction Time (In hrs):</label>
+              <input formControlName="predictionTime" id="predictionTime" type="number" class="form-control"
+                [ngClass]="{ 'is-invalid': predictionTimesubmitted && rpt.predictionTime.invalid }" placeholder="Enter duration(in hrs.)"
+                autocomplete="off" min="1" max="15"/>
+              <div *ngIf="predictionTimesubmitted && rpt.predictionTime.invalid" class="invalid-feedback">
+                <div *ngIf="rpt.predictionTime.errors.required">Prediction Time is required.</div>
+                <div *ngIf="rpt.predictionTime.errors.min">Give input greater than or equal to 1 hrs.</div>
+                <div *ngIf="rpt.predictionTime.errors.max">Give input only upto 15 hrs.</div>
+              </div>
+            </div>
+            <button class="btn btn-dark add-button width100" type="submit">SUBMIT</button>
+            <button class="btn btn-light cancel-button width100" id="closerptmodel" data-bs-dismiss="modal"
+              type="button" (click)="clearRoutePredictionTimeFrom()">CANCEL</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+</div>

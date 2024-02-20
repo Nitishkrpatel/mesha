@@ -1,0 +1,203 @@
+.admin-title {
+    margin: 20px 10px;
+    font-family: 'Charlie Display';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    color: #28292C;
+}
+
+
+.sub-title-admin {
+    font-family: 'CharlieText-bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 10px;
+    // text-transform: uppercase;
+}
+
+.dashboard-table th {
+    font-family: 'CharlieText-Bold';
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: #FFFFFF !important;
+    margin: 0px 8px;
+    padding-left: 6rem;
+    padding-right: 4rem;
+    text-align: center;
+    background-color: #174C83 !important;
+}
+
+.dashboard-table td {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    padding-left: 6rem;
+    padding-right: 4rem;
+    text-align: center;
+    color: #174C83;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: white !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+.add-button,
+.cancel-button {
+    border-radius: 4px;
+    font-family: CharlieText-Bold;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 16px 0px;
+    padding: 12px;
+}
+
+.cancel-button {
+    margin-left: 5px;
+}
+
+.margin-top1em,
+.adduser-button {
+    margin-top: 1em !important;
+}
+
+
+.queue-requests-tab .nav-link.active {
+    font-family: 'CharlieText-bold';
+    background-color: transparent !important;
+    font-weight: bolder;
+    border-radius: 0px;
+}
+
+.queue-requests-tab .nav-link {
+    font-family: 'Charlie Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.nav-link-count {
+    font-family: 'Charlie Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0px 8px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+}
+
+.search-users .form-control:focus {
+    background-color: transparent !important;
+    border-color: none !important;
+    box-shadow: none !important;
+}
+
+
+.search-users {
+    /* border: 1px solid #B4B1B1; */
+    border-radius: 50px;
+    padding-left: 1em;
+}
+
+.search-users input {
+    font-family: Charlie Text;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin-left: 5px;
+    width: 310px;
+}
+
+.note {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    margin: 16px 0px;
+}
+
+.content {
+    font-family: 'Charlie Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.search-users input {
+    color: #174C83 !important;
+}
+
+.search-users {
+    color: #174C83;
+    border: 1px solid #174C83;
+}
+
+// .search-users input::placeholder {
+//     color: #a8d2f1;
+// }
+
+.nav-link.active {
+    color: #174C83 !important;
+    border-bottom: 3px solid #174C83;
+}
+
+.nav-item a {
+    color: #174C83;
+}
+
+.querequest-count {
+    font-family: 'Charlie Text';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0px 8px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    background: #174C83;
+}
+
+::ng-deep .mat-sort-header-arrow {
+    color: white !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+::ng-deep .dashboard-table .mat-sort-header-container {
+    justify-content: center;
+}
+
+@media screen and (min-width:768px)and (max-width:2150px) {
+
+    .dashboard-table td,
+    .dashboard-table th {
+        padding: 0.75rem;
+        text-align: center;
+
+    }
+
+    .dashboard-table th {
+        padding-left: 28px;
+    }
+}

@@ -1,0 +1,8 @@
+*.csv
+__pycache__
+gitignore
+*.pyc
+*.txt
+*.cfg
+tox.ini
+.vscode

@@ -1,0 +1,325 @@
+// Vessel filter
+
+.padding-r-5 {
+    padding-right: 5px;
+}
+
+.vf {
+    height: calc(100vh - 60px);
+    padding: 1em;
+}
+
+.vf h3 {
+    font-family: Charlie Display;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+}
+
+.paading_negative {
+    margin-left: -14px !important;
+    margin-right: -14px !important;
+}
+
+.padding-0 {
+    padding: 0px !important;
+}
+
+.startend_date {
+    // width: 70% !important;
+    font-size: 12px;
+}
+
+#from_date {
+    width: 70% !important;
+}
+
+.apply-vf {
+    font-family: CharlieText-Bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #343232;
+    border-radius: 2px;
+    width: 100%;
+}
+
+.vf_ship_types,
+.vf_search {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    text-align-last: center;
+}
+
+.vf-search {
+    border-bottom: 1px solid #45709C !important;
+}
+
+.vf-add-btn {
+    border-radius: 4px;
+    font-family: CharlieText-Bold;
+    font-size: 14px;
+    line-height: 16px;
+    color: white;
+    background-color: #1598FF;
+}
+
+.settimestamp {
+    text-align: center;
+}
+
+.soi-header {
+    font-family: CharlieText-Bold;
+}
+
+
+.VF-submit-btn {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px !important;
+    padding: 10px;
+    margin-bottom: 1em;
+    width: 100%;
+    background-color: #1598FF;
+    color: white !important;
+}
+
+#vf-accordion {
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 15px;
+
+    background-color: #123D69;
+}
+
+.checkbox {
+    margin-right: 5px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white !important
+}
+
+.vf_search_result h5 {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 10px;
+    text-transform: uppercase;
+    color: white;
+    margin: 16px;
+}
+
+.vf_search_result ul {
+    height: 150px;
+    overflow-y: auto;
+    margin-right: 2em;
+    overflow-x: hidden;
+}
+
+.vf_search_result ul li {
+    list-style-type: none;
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: white;
+    padding: 0px 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 15em;
+}
+
+.vf-search {
+    padding-left: 1em;
+    flex-wrap: nowrap;
+}
+
+.vf-search input {
+    font-family: Charlie Text;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin-left: 5px;
+    color: white;
+}
+
+// .vf-search span {
+//     margin-top: 0.5em;
+// }
+
+.vf-search input::placeholder {
+    color: white !important;
+}
+
+
+::ng-deep .suggestions-container,
+::ng-deep .not-found {
+    width: 200% !important;
+}
+
+.vf-search select {
+    background-color: transparent !important;
+    border: none;
+    border-left: 1px solid #B4B1B1;
+    border-radius: 0px;
+    color: white !important;
+    padding: 0px;
+}
+
+.vf-search select option {
+    color: black;
+}
+
+.vf-search .form-control:focus {
+    background-color: transparent !important;
+    border-color: none !important;
+    box-shadow: none !important;
+}
+
+.speed .form-control:focus,
+.vf-search .form-control:focus {
+    color: white !important;
+}
+
+#pname::placeholder,
+#from_date::placeholder,
+#to_date::placeholder,
+#from_date,
+#to_date {
+    color: white;
+    font-family: CharlieText-Bold;
+    font-size: 12px;
+}
+
+#pname {
+    font-family: CharlieText-Bold;
+    font-size: 16px;
+    color: white;
+}
+
+.presetlist {
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+.label {
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.vfpannel {
+    z-index: 1000;
+    bottom: 0;
+    position: fixed;
+    font-family: Charlie Text !important;
+    left: 58%;
+    transform: translate(-50%, 0%);
+    opacity: 0.8 !important;
+}
+
+.vfpannel #vfpannel-header {
+    width: 75em;
+    height: auto;
+    bottom: 0;
+    margin-left: 15px;
+    background-color: #0E2E4F !important;
+}
+
+.vfpannelheader {
+    font-size: 20px;
+    font-family: CharlieText-Bold;
+}
+
+.vfpannelsubheader {
+    font-family: CharlieText-Bold;
+    font-style: normal;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 26px;
+    color: white;
+    margin-left: 0.5em;
+}
+
+.tracks_category {
+    border-radius: 4px;
+    font-family: Charlie Text;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 5px;
+}
+
+.tracks_category:focus {
+    box-shadow: none !important;
+}
+
+.tracks_category:hover {
+    color: white !important;
+}
+
+.padding-lr-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.dotted_wrap {
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.add-button,
+.cancel-button {
+    border-radius: 4px;
+    font-family: CharlieText-Bold;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 16px 0px;
+    padding: 12px;
+}
+
+.cancel-button {
+    margin-left: 5px;
+}
+
+.center-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.tracks_category {
+    background-color: #0E2E4F;
+    border: 1px solid #117ACC;
+    color: #FFFFFF;
+}
+
+.no_tracks {
+    background: #117ACC;
+}
+// end vessel filter

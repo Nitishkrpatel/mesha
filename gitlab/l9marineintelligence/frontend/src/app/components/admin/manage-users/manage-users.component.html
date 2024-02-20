@@ -1,0 +1,593 @@
+<div *ngIf="newUser === false && editUser === false" style="margin-right: 10px;">
+    <div class='row'>
+        <div class="col-sm-9">
+            <h1 class="admin-title">
+                Manage Users
+            </h1>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-dark add-button adduser-button" (click)="openAddNewUser()">
+                <svg style="margin-right: 5px;" width="15" height="15" viewBox="0 0 10 10" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M5 0.875C4.65482 0.875 4.375 1.15482 4.375 1.5V4.375H1.5C1.15482 4.375 0.875 4.65482 0.875 5C0.875 5.34518 1.15482 5.625 1.5 5.625H4.375V8.5C4.375 8.84518 4.65482 9.125 5 9.125C5.34518 9.125 5.625 8.84518 5.625 8.5V5.625H8.5C8.84518 5.625 9.125 5.34518 9.125 5C9.125 4.65482 8.84518 4.375 8.5 4.375H5.625V1.5C5.625 1.15482 5.34518 0.875 5 0.875Z"
+                        fill="#FFFFFF" />
+                </svg>
+                ADD NEW USER</button>
+        </div>
+    </div>
+    <hr />
+    <!-- <mat-divider></mat-divider> -->
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="input-group search-users" style="padding-top: 6px;">
+                <span class="input-group-addon">
+                    <svg style="margin-top:6px;padding-bottom: 5px;" width="18" height="18" viewBox="0 0 14 14"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M6.33335 0.166626C2.9276 0.166626 0.166687 2.92754 0.166687 6.33329C0.166687 9.73905 2.9276 12.5 6.33335 12.5C7.73544 12.5 9.0289 12.0317 10.0648 11.2433L12.4108 13.5892C12.7362 13.9146 13.2638 13.9146 13.5893 13.5892C13.9147 13.2638 13.9147 12.7361 13.5893 12.4107L11.2433 10.0648C12.0317 9.02883 12.5 7.73538 12.5 6.33329C12.5 2.92754 9.73911 0.166626 6.33335 0.166626ZM1.83335 6.33329C1.83335 3.84801 3.84807 1.83329 6.33335 1.83329C8.81863 1.83329 10.8334 3.84801 10.8334 6.33329C10.8334 7.54169 10.3575 8.63828 9.58221 9.44697C9.5574 9.46667 9.53354 9.48793 9.51076 9.5107C9.48799 9.53348 9.46673 9.55734 9.44703 9.58214C8.63834 10.3574 7.54176 10.8333 6.33335 10.8333C3.84807 10.8333 1.83335 8.81857 1.83335 6.33329Z" />
+                    </svg>
+                </span>
+                <form [formGroup]="userNameSearchForm" noValidate>
+                    <input style="width: inherit;" formControlName="user_search_text" id="user_search" type="text"
+                        class="form-control" placeholder="Search By Name, Username, Role, Status"
+                        (ngModelChange)="getSearchResultForUser($event)" autocomplete="off"
+                        style="padding-bottom: 7px;" />
+
+                </form>
+                <span id='close' class="input-group-addon">
+                    <a class="nav-link padding-lr-0 clearSearch" (click)="clearSearch()"
+                        style="padding:0px 0.7em 0px 0px;">
+                        <svg style="position:absolute; right: 1;margin-top: 6px;" width="14" height="14"
+                            viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="imageColors"
+                                d="M1.58921 0.410734C1.26378 0.0852973 0.73614 0.0852973 0.410704 0.410734C0.0852668 0.736171 0.0852668 1.26381 0.410704 1.58925L3.82145 4.99999L0.410704 8.41073C0.085267 8.73617 0.085267 9.26381 0.410704 9.58924C0.73614 9.91468 1.26378 9.91468 1.58921 9.58924L4.99996 6.1785L8.4107 9.58924C8.73614 9.91468 9.26378 9.91468 9.58921 9.58924C9.91465 9.26381 9.91465 8.73617 9.58921 8.41073L6.17847 4.99999L9.58921 1.58925C9.91465 1.26381 9.91465 0.736171 9.58921 0.410734C9.26378 0.0852972 8.73614 0.0852972 8.4107 0.410734L4.99996 3.82148L1.58921 0.410734Z" />
+                        </svg>
+                    </a>
+                </span>
+            </div>
+            <p class="note" style="margin-left: 2em;" *ngIf='seachedTextCount !== 0'>
+                We found {{userSearchedCount}} users matching this criteria.
+            </p>
+
+        </div>
+        <div class="col-xl-1"></div>
+        <div class="col-xl-7">
+            <ul class="nav nav-pills queue-requests-tab" role="tablist">
+                <li id="total-tab" class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="pill" href="#total">
+                        <span class="querequest-count">{{totalUserCount}}</span>Total
+                    </a>
+                </li>
+                <li id="active-tab" class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#active">
+                        <span class="querequest-count"> {{activeCount}}</span>Active
+                    </a>
+                </li>
+                <li id="pending-tab" class="nav-item">
+                    <a class="nav-link" data-bs-toggle="pill" href="#pending">
+                        <span class="querequest-count"> {{pendingCount}}</span>Pending
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <hr />
+    <div class="tab-content" id="popup_tabContent">
+        <div id="total" class="p-0 tab-pane active">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-responsive dashboard-table" matSort
+                        (matSortChange)="sortUserData($event)">
+                        <tbody>
+                            <tr class="heading">
+                                <th mat-sort-header="name">name</th>
+                                <th mat-sort-header="email">Email address</th>
+                                <th mat-sort-header="user_name">Username</th>
+                                <th>role type</th>
+                                <th mat-sort-header="status">Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr *ngFor="let s of allUsersSortedData | paginate: {itemsPerPage: itemsPerPage, currentPage:totalCurrentPage, id: 'allPaginator'}"
+                                class="shiptypedeviationTd">
+                                <td>{{s.name}}</td>
+                                <td>{{s.email}}</td>
+                                <td>{{s.user_name}}</td>
+                                <td>{{s.role_name}}</td>
+                                <td *ngIf='s.status === true'>
+                                    <svg width="9" height="8" viewBox="0 0 9 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="4.5" cy="4" r="4" fill="#006400" />
+                                    </svg> <br />
+                                    Active
+                                </td>
+                                <td *ngIf='s.status === false '>
+                                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="4" cy="4" r="4" fill="#FFBE3D" />
+                                    </svg><br />
+                                    Pending
+                                </td>
+                                <td>
+                                    <a id="edit-all-btn" style="margin-right: 1em;" class="openEditUserInfo-button"
+                                        (click)="openEditUserInfo(s)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageEditColors"
+                                                d="M26.6581 25.7944C27.1224 25.7944 27.5 26.1769 27.5 26.6472C27.5 27.1184 27.1224 27.5 26.6581 27.5H21.8997C21.4355 27.5 21.0579 27.1184 21.0579 26.6472C21.0579 26.1769 21.4355 25.7944 21.8997 25.7944H26.6581ZM23.3582 13.0826L24.5874 14.059C25.0914 14.4531 25.4275 14.9727 25.5424 15.5192C25.6751 16.1202 25.5336 16.7106 25.1357 17.2212L17.8137 26.6899C17.4776 27.1199 16.9824 27.3618 16.4518 27.3707L13.5337 27.4066C13.3745 27.4066 13.2418 27.2991 13.2065 27.1468L12.5432 24.2712C12.4283 23.7427 12.5432 23.1963 12.8793 22.7752L18.0701 16.0566C18.1585 15.9491 18.3177 15.9321 18.4238 16.0119L20.608 17.7497C20.7495 17.8662 20.9441 17.9289 21.1475 17.902C21.5808 17.8483 21.8726 17.4541 21.8284 17.0331C21.8018 16.8181 21.6957 16.6389 21.5542 16.5045C21.51 16.4687 19.4319 14.8025 19.4319 14.8025C19.2993 14.695 19.2728 14.4979 19.3789 14.3645L20.2013 13.2975C20.9618 12.3211 22.2882 12.2315 23.3582 13.0826Z" />
+                                            <rect id="strokecolor" x="0.5" y="0.5" width="39" height="39" rx="19.5" />
+                                        </svg>
+                                    </a>
+                                    <a id="delete-all-btn" class="deleteuseropenmodel-button"
+                                        (click)="deleteUserOpenModel(s.user_name)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageDeleteColors"
+                                                d="M24.9491 18.0809C25.1153 18.0809 25.266 18.1534 25.3852 18.2759C25.4962 18.4068 25.5521 18.5693 25.5359 18.7409C25.5359 18.7976 25.0918 22.7475 24.8381 25.1117C24.6793 26.5625 23.744 27.4433 22.3411 27.4675C21.2624 27.4917 21.0413 27.5 20.0031 27.5C18.9009 27.5 18.6563 27.4917 17.61 27.4675C16.2541 27.435 15.318 26.5383 15.1672 25.1117C14.9063 22.7392 14.4702 18.7976 14.4621 18.7409C14.454 18.5693 14.5091 18.4068 14.621 18.2759C14.7312 18.1534 14.8901 18.0809 15.057 18.0809H24.9491ZM21.7205 12.5C22.4572 12.5 23.1153 13.0142 23.3058 13.7475L23.4419 14.3558C23.5522 14.8516 23.9817 15.2025 24.4761 15.2025H26.0725C26.3967 15.2025 26.6666 15.4716 26.6666 15.8141V16.1308C26.6666 16.465 26.3967 16.7425 26.0725 16.7425H13.9281C13.6031 16.7425 13.3333 16.465 13.3333 16.1308V15.8141C13.3333 15.4716 13.6031 15.2025 13.9281 15.2025H15.5246C16.0181 15.2025 16.4477 14.8516 16.5587 14.3566L16.6859 13.7883C16.8837 13.0142 17.5345 12.5 18.2793 12.5H21.7205Z" />
+                                            <rect id="strokecolor" x="0.5" y="0.5" width="39" height="39" rx="19.5" />
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="totalCurrentPage = $event" id="allPaginator"
+                        *ngIf="totalUserCount > 0 ">
+                    </pagination-controls>
+                </div>
+
+            </div>
+        </div>
+        <div id="active" class="p-0 tab-pane">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-responsive dashboard-table" matSort
+                        (matSortChange)="sortUserData($event)">
+                        <tbody>
+                            <tr class="heading">
+                                <th mat-sort-header="name">name</th>
+                                <th mat-sort-header="email">Email address</th>
+                                <th mat-sort-header="user_name">Username</th>
+                                <th>role type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr *ngFor="let s of activeSortedData | paginate: {itemsPerPage: itemsPerPage, currentPage:activeCurrentPage, id: 'activePaginator'}"
+                                class="shiptypedeviationTd">
+                                <td>{{s.name}}</td>
+                                <td>{{s.email}}</td>
+                                <td>{{s.user_name}}</td>
+                                <td>{{s.role_name}}</td>
+                                <td>
+                                    <svg width="9" height="8" viewBox="0 0 9 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="4.5" cy="4" r="4" fill="#006400" />
+                                    </svg> <br />
+                                    Active
+                                </td>
+
+                                <td>
+                                    <a id="edit-active-btn" style="margin-right: 1em;" (click)="openEditUserInfo(s)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageEditColors"
+                                                d="M26.6581 25.7944C27.1224 25.7944 27.5 26.1769 27.5 26.6472C27.5 27.1184 27.1224 27.5 26.6581 27.5H21.8997C21.4355 27.5 21.0579 27.1184 21.0579 26.6472C21.0579 26.1769 21.4355 25.7944 21.8997 25.7944H26.6581ZM23.3582 13.0826L24.5874 14.059C25.0914 14.4531 25.4275 14.9727 25.5424 15.5192C25.6751 16.1202 25.5336 16.7106 25.1357 17.2212L17.8137 26.6899C17.4776 27.1199 16.9824 27.3618 16.4518 27.3707L13.5337 27.4066C13.3745 27.4066 13.2418 27.2991 13.2065 27.1468L12.5432 24.2712C12.4283 23.7427 12.5432 23.1963 12.8793 22.7752L18.0701 16.0566C18.1585 15.9491 18.3177 15.9321 18.4238 16.0119L20.608 17.7497C20.7495 17.8662 20.9441 17.9289 21.1475 17.902C21.5808 17.8483 21.8726 17.4541 21.8284 17.0331C21.8018 16.8181 21.6957 16.6389 21.5542 16.5045C21.51 16.4687 19.4319 14.8025 19.4319 14.8025C19.2993 14.695 19.2728 14.4979 19.3789 14.3645L20.2013 13.2975C20.9618 12.3211 22.2882 12.2315 23.3582 13.0826Z" />
+                                            <rect id="strokecolor" x="0.5" y="0.5" width="39" height="39" rx="19.5" />
+                                        </svg>
+                                    </a>
+                                    <a id="delete-active-btn" (click)="deleteUserOpenModel(s.user_name)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageDeleteColors"
+                                                d="M24.9491 18.0809C25.1153 18.0809 25.266 18.1534 25.3852 18.2759C25.4962 18.4068 25.5521 18.5693 25.5359 18.7409C25.5359 18.7976 25.0918 22.7475 24.8381 25.1117C24.6793 26.5625 23.744 27.4433 22.3411 27.4675C21.2624 27.4917 21.0413 27.5 20.0031 27.5C18.9009 27.5 18.6563 27.4917 17.61 27.4675C16.2541 27.435 15.318 26.5383 15.1672 25.1117C14.9063 22.7392 14.4702 18.7976 14.4621 18.7409C14.454 18.5693 14.5091 18.4068 14.621 18.2759C14.7312 18.1534 14.8901 18.0809 15.057 18.0809H24.9491ZM21.7205 12.5C22.4572 12.5 23.1153 13.0142 23.3058 13.7475L23.4419 14.3558C23.5522 14.8516 23.9817 15.2025 24.4761 15.2025H26.0725C26.3967 15.2025 26.6666 15.4716 26.6666 15.8141V16.1308C26.6666 16.465 26.3967 16.7425 26.0725 16.7425H13.9281C13.6031 16.7425 13.3333 16.465 13.3333 16.1308V15.8141C13.3333 15.4716 13.6031 15.2025 13.9281 15.2025H15.5246C16.0181 15.2025 16.4477 14.8516 16.5587 14.3566L16.6859 13.7883C16.8837 13.0142 17.5345 12.5 18.2793 12.5H21.7205Z" />
+                                            <rect id="strokecolor" x="0.5" y="0.5" width="39" height="39" rx="19.5" />
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="activeCurrentPage = $event" id="activePaginator"
+                        *ngIf="activeCount > 0">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div id="pending" class="p-0 tab-pane">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-responsive dashboard-table" matSort
+                        (matSortChange)="sortUserData($event)">
+                        <tbody>
+                            <tr class="heading">
+                                <th mat-sort-header="name">name</th>
+                                <th mat-sort-header="email">Email address</th>
+                                <th mat-sort-header="user_name">Username</th>
+                                <th>role type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr *ngFor="let s of pendingSortedData | paginate: {itemsPerPage: itemsPerPage, currentPage:pendingCurrentPage, id: 'pendingPaginator'}"
+                                class="shiptypedeviationTd">
+                                <td>{{s.name}}</td>
+                                <td>{{s.email}}</td>
+                                <td>{{s.user_name}}</td>
+                                <td>{{s.role_name}}</td>
+
+                                <td>
+                                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="4" cy="4" r="4" fill="#FFBE3D" />
+                                    </svg><br />
+                                    Pending
+                                </td>
+                                <td>
+                                    <a id="edit-pending-btn" style="margin-right: 1em;" (click)="openEditUserInfo(s)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageEditColors"
+                                                d="M26.6581 25.7944C27.1224 25.7944 27.5 26.1769 27.5 26.6472C27.5 27.1184 27.1224 27.5 26.6581 27.5H21.8997C21.4355 27.5 21.0579 27.1184 21.0579 26.6472C21.0579 26.1769 21.4355 25.7944 21.8997 25.7944H26.6581ZM23.3582 13.0826L24.5874 14.059C25.0914 14.4531 25.4275 14.9727 25.5424 15.5192C25.6751 16.1202 25.5336 16.7106 25.1357 17.2212L17.8137 26.6899C17.4776 27.1199 16.9824 27.3618 16.4518 27.3707L13.5337 27.4066C13.3745 27.4066 13.2418 27.2991 13.2065 27.1468L12.5432 24.2712C12.4283 23.7427 12.5432 23.1963 12.8793 22.7752L18.0701 16.0566C18.1585 15.9491 18.3177 15.9321 18.4238 16.0119L20.608 17.7497C20.7495 17.8662 20.9441 17.9289 21.1475 17.902C21.5808 17.8483 21.8726 17.4541 21.8284 17.0331C21.8018 16.8181 21.6957 16.6389 21.5542 16.5045C21.51 16.4687 19.4319 14.8025 19.4319 14.8025C19.2993 14.695 19.2728 14.4979 19.3789 14.3645L20.2013 13.2975C20.9618 12.3211 22.2882 12.2315 23.3582 13.0826Z" />
+                                            <rect id="strokecolor" x="0.5" y="0.5" width="39" height="39" rx="19.5" />
+                                        </svg>
+                                    </a>
+                                    <a id="delete-pending-btn" (click)="deleteUserOpenModel(s.user_name)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path id="imageDeleteColors"
+                                                d="M24.9491 18.0809C25.1153 18.0809 25.266 18.1534 25.3852 18.2759C25.4962 18.4068 25.5521 18.5693 25.5359 18.7409C25.5359 18.7976 25.0918 22.7475 24.8381 25.1117C24.6793 26.5625 23.744 27.4433 22.3411 27.4675C21.2624 27.4917 21.0413 27.5 20.0031 27.5C18.9009 27.5 18.6563 27.4917 17.61 27.4675C16.2541 27.435 15.318 26.5383 15.1672 25.1117C14.9063 22.7392 14.4702 18.7976 14.4621 18.7409C14.454 18.5693 14.5091 18.4068 14.621 18.2759C14.7312 18.1534 14.8901 18.0809 15.057 18.0809H24.9491ZM21.7205 12.5C22.4572 12.5 23.1153 13.0142 23.3058 13.7475L23.4419 14.3558C23.5522 14.8516 23.9817 15.2025 24.4761 15.2025H26.0725C26.3967 15.2025 26.6666 15.4716 26.6666 15.8141V16.1308C26.6666 16.465 26.3967 16.7425 26.0725 16.7425H13.9281C13.6031 16.7425 13.3333 16.465 13.3333 16.1308V15.8141C13.3333 15.4716 13.6031 15.2025 13.9281 15.2025H15.5246C16.0181 15.2025 16.4477 14.8516 16.5587 14.3566L16.6859 13.7883C16.8837 13.0142 17.5345 12.5 18.2793 12.5H21.7205Z" />
+                                            <rect id="strokecolor" x="0.5" y="0.5" width="39" height="39" rx="19.5" />
+                                        </svg>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="pendingCurrentPage = $event" id="pendingPaginator"
+                        *ngIf="pendingCount > 0">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="newUser === false && editUser === true">
+    <div class='row'>
+        <div class="col-sm-6">
+            <h1 class="admin-title">
+                <a (click)="backToManageUser()" style="margin-right: 1em;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M17.6772 12.1875C17.6772 11.7273 17.3041 11.3542 16.8438 11.3542H6.84383C6.38359 11.3542 6.0105 11.7273 6.0105 12.1875C6.0105 12.6477 6.38359 13.0208 6.84383 13.0208H16.8438C17.3041 13.0208 17.6772 12.6477 17.6772 12.1875Z" />
+                        <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M11.4591 7.5722C11.1337 7.24677 10.6061 7.24677 10.2806 7.5722L6.25458 11.5982C5.92914 11.9237 5.92914 12.4513 6.25458 12.7768L10.2806 16.8028C10.6061 17.1282 11.1337 17.1282 11.4591 16.8028C11.7846 16.4774 11.7846 15.9497 11.4591 15.6243L8.02234 12.1875L11.4591 8.75071C11.7846 8.42528 11.7846 7.89764 11.4591 7.5722Z" />
+                    </svg>
+                </a>
+                Edit User
+            </h1>
+        </div>
+    </div>
+
+    <form style="padding-left: 15px;" [formGroup]="editUserForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="content">General Information</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input type="text" (keydown)="validateFullName($event)" id="name"
+                        formControlName="name" matInput>
+                    <mat-hint class="danger" *ngIf="e.name.errors?.pattern">Special Characters not allowed.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input type="text" id="email" formControlName="email" matInput class="checkForEmailId-input"
+                        (keyup)="checkUserIdOrEmailId('email','edit')">
+                    <mat-icon matSuffix>
+                        <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="strokecolor" id="imageColors"
+                                d="M18.1656 1.83418L18.1661 1.83474C19.0224 2.69013 19.5005 3.84295 19.5005 5.05V12.95C19.5005 15.4625 17.4557 17.5 14.9395 17.5H5.06049C2.54441 17.5 0.500488 15.4626 0.500488 12.95V5.05C0.500488 2.53672 2.53505 0.5 5.06049 0.5H14.9395C16.1489 0.5 17.3112 0.978001 18.1656 1.83418ZM16.1205 4.70251L16.1086 4.70131L16.0966 4.70068C15.7626 4.68319 15.436 4.79416 15.1849 5.01934L10.6885 8.60926L10.6885 8.60919L10.6813 8.61513C10.2878 8.94145 9.72313 8.94459 9.31675 8.61273L9.31676 8.61271L9.31284 8.60957L4.81284 5.00957L4.80542 5.00364L4.79779 4.99799C4.29666 4.62738 3.5857 4.66272 3.14326 5.12013C2.70195 5.56506 2.65011 6.27303 3.03205 6.77338L3.0529 6.8007L3.07729 6.8249L3.20829 6.95491L3.22943 6.97589L3.25292 6.99421L7.80158 10.5432C7.80178 10.5433 7.80198 10.5435 7.80219 10.5436C8.44814 11.051 9.23516 11.33 10.0605 11.33C10.8822 11.33 11.682 11.052 12.3287 10.5429L12.3288 10.5429L12.3319 10.5404L16.8429 6.93038L16.8645 6.91311L16.884 6.89355L16.964 6.81355L16.981 6.79655L16.9963 6.77799C17.3883 6.30234 17.3891 5.61016 16.9782 5.13353L16.9718 5.1261L16.9651 5.11893C16.7402 4.87785 16.4355 4.73417 16.1205 4.70251Z" />
+                        </svg>
+                    </mat-icon>
+                    <mat-hint class="danger" *ngIf="e.email.errors?.email">Email address is in wrong
+                        format.
+                    </mat-hint>
+                    <mat-hint class="danger" *ngIf="e.email.errors?.duplicate">
+                        Email ID not available.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Phone Number</mat-label>
+                    <input type="text" id="mobile" class="onlyNumberKey" (keypress)="onlyNumberKey($event)"
+                        maxlength='10' formControlName="mobile" matInput>
+                    <mat-icon matSuffix>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="imageColors"
+                                d="M12.3561 0.00792976C12.133 -0.0240483 11.9089 0.0419064 11.7307 0.183809C11.5474 0.32771 11.4329 0.535567 11.408 0.768408C11.3552 1.23908 11.6948 1.66479 12.1649 1.71776C15.4065 2.07951 17.9262 4.60477 18.2907 7.85654C18.3395 8.29224 18.705 8.62101 19.1412 8.62101C19.174 8.62101 19.2059 8.61902 19.2388 8.61502C19.4668 8.59004 19.67 8.47711 19.8134 8.29724C19.9558 8.11736 20.0206 7.89351 19.9947 7.66467C19.5405 3.60746 16.4005 0.45862 12.3561 0.00792976Z" />
+                            <path id="imageColors"
+                                d="M12.4183 3.48988C11.9422 3.40194 11.505 3.70573 11.4144 4.17041C11.3238 4.6351 11.6285 5.08878 12.0916 5.17972C13.4859 5.45153 14.5624 6.53079 14.8353 7.92983C14.913 8.33256 15.2675 8.62635 15.6759 8.62635C15.7306 8.62635 15.7854 8.62136 15.8412 8.61136C16.3043 8.51843 16.609 8.06574 16.5184 7.60006C16.1111 5.51049 14.5027 3.8966 12.4183 3.48988Z" />
+                            <path id="imageColors"
+                                d="M13.6378 12.3543C12.5152 12.7476 11.2506 13.1906 9.03174 10.9724C6.81304 8.75431 7.255 7.48904 7.64729 6.36597C7.96031 5.46983 8.24171 4.66423 7.11449 3.53733C6.80949 3.23241 6.535 2.94351 6.28214 2.67738C4.50501 0.806958 3.79649 0.061244 1.07397 2.78395C1.05361 2.80927 1.01862 2.84345 0.973396 2.88761C0.324873 3.52102 -2.42781 6.20951 5.6846 14.3197C13.7947 22.4275 16.4815 19.6749 17.1153 19.0256C17.1596 18.9802 17.1938 18.9451 17.2192 18.9247C19.9403 16.2044 19.1921 15.4928 17.3149 13.7072C17.0519 13.457 16.7666 13.1857 16.4656 12.8848C15.3385 11.7585 14.5334 12.0406 13.6378 12.3543Z" />
+                        </svg>
+                    </mat-icon>
+                    <mat-hint class="danger" *ngIf="e.mobile.errors?.minlength"> Invalid phone
+                        number.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="content">Credential Information</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input style="cursor: not-allowed;" type="text" id="user_name" formControlName="user_name"
+                        onkeydown="return /[a-zA-Z0-9-_]/i.test(event.key)" matInput readonly>
+                    <mat-hint class="danger" *ngIf="e.user_name.errors?.pattern">Special Characters not allowed.
+                    </mat-hint>
+                    <mat-icon matSuffix>
+                        <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="strokecolor" id="imageColors"
+                                d="M8 13.6739C10.1572 13.6739 12.0862 13.8512 13.4601 14.3378C14.1437 14.5799 14.6548 14.8866 14.9915 15.2541C15.3178 15.6103 15.5 16.0437 15.5 16.599C15.5 17.1535 15.3171 17.5849 14.9897 17.9388C14.6517 18.3042 14.1386 18.6084 13.4531 18.8478C12.0756 19.3289 10.1461 19.5 8 19.5C5.84334 19.5 3.9143 19.3228 2.5403 18.8362C1.85663 18.5941 1.34539 18.2873 1.00864 17.9198C0.682206 17.5636 0.5 17.1302 0.5 16.575C0.5 16.0205 0.682942 15.589 1.0103 15.2351C1.34831 14.8697 1.86139 14.5655 2.54688 14.3261C3.92436 13.845 5.85395 13.6739 8 13.6739ZM8 0.5C10.6632 0.5 12.794 2.6304 12.794 5.29105C12.794 7.95183 10.6631 10.0831 8 10.0831C5.33787 10.0831 3.20601 7.95177 3.20601 5.29105C3.20601 2.63046 5.33775 0.5 8 0.5Z" />
+                        </svg>
+
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="content">Assign Role/s</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 padding-0px">
+
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Role/s</mat-label>
+                    <mat-select formControlName="role" id="role">
+                        <!-- <mat-select formControlName="role" id="role" [(value)]="role" multiple> -->
+                        <span *ngFor='let r of allRoles'>
+                            <mat-option [value]="r.role_id">{{r.role_name}}</mat-option>
+                        </span>
+                    </mat-select>
+                    <mat-hint class="danger" *ngIf="e.role.errors?.min">Select atleast one role.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-dark add-button updateUserInfo" type="submit" (click)="updateUserInfo()">
+                    SAVE CHANGES
+                </button>
+                <button class="btn btn-light cancel-button" type="button" (click)="backToManageUser()">
+                    CLEAR ALL</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div *ngIf="newUser === true && editUser === false">
+    <div class='row'>
+        <div class="col-sm-6">
+            <h1 class="admin-title">
+                <a (click)="backToManageUser()" class="backArrow" style="margin-right: 1em;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M17.6772 12.1875C17.6772 11.7273 17.3041 11.3542 16.8438 11.3542H6.84383C6.38359 11.3542 6.0105 11.7273 6.0105 12.1875C6.0105 12.6477 6.38359 13.0208 6.84383 13.0208H16.8438C17.3041 13.0208 17.6772 12.6477 17.6772 12.1875Z" />
+                        <path id="imageColors" fill-rule="evenodd" clip-rule="evenodd"
+                            d="M11.4591 7.5722C11.1337 7.24677 10.6061 7.24677 10.2806 7.5722L6.25458 11.5982C5.92914 11.9237 5.92914 12.4513 6.25458 12.7768L10.2806 16.8028C10.6061 17.1282 11.1337 17.1282 11.4591 16.8028C11.7846 16.4774 11.7846 15.9497 11.4591 15.6243L8.02234 12.1875L11.4591 8.75071C11.7846 8.42528 11.7846 7.89764 11.4591 7.5722Z" />
+                    </svg>
+                </a>
+                Add New User
+            </h1>
+        </div>
+    </div>
+
+    <form style="padding-left: 15px;" [formGroup]="addNewUserForm">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="content">General Information</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline" autocomplete="off">
+                    <mat-label>Full Name</mat-label>
+                    <input type="text" (keydown)="validateFullName($event)" id="name"
+                        formControlName="name" matInput>
+                    <mat-hint class="danger" *ngIf="addnewUserSubmitted && n.name.errors?.required">Full name
+                        is
+                        required.
+                    </mat-hint>
+                    <mat-hint class="danger" *ngIf="n.name.errors?.pattern">Special Characters not allowed.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input type="text" id="email" formControlName="email" matInput class="checkForEmailId-input"
+                        (keyup)="checkUserIdOrEmailId('email','add')" autocomplete="off">
+                    <mat-icon matSuffix>
+                        <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="strokecolor" id="imageColors"
+                                d="M18.1656 1.83418L18.1661 1.83474C19.0224 2.69013 19.5005 3.84295 19.5005 5.05V12.95C19.5005 15.4625 17.4557 17.5 14.9395 17.5H5.06049C2.54441 17.5 0.500488 15.4626 0.500488 12.95V5.05C0.500488 2.53672 2.53505 0.5 5.06049 0.5H14.9395C16.1489 0.5 17.3112 0.978001 18.1656 1.83418ZM16.1205 4.70251L16.1086 4.70131L16.0966 4.70068C15.7626 4.68319 15.436 4.79416 15.1849 5.01934L10.6885 8.60926L10.6885 8.60919L10.6813 8.61513C10.2878 8.94145 9.72313 8.94459 9.31675 8.61273L9.31676 8.61271L9.31284 8.60957L4.81284 5.00957L4.80542 5.00364L4.79779 4.99799C4.29666 4.62738 3.5857 4.66272 3.14326 5.12013C2.70195 5.56506 2.65011 6.27303 3.03205 6.77338L3.0529 6.8007L3.07729 6.8249L3.20829 6.95491L3.22943 6.97589L3.25292 6.99421L7.80158 10.5432C7.80178 10.5433 7.80198 10.5435 7.80219 10.5436C8.44814 11.051 9.23516 11.33 10.0605 11.33C10.8822 11.33 11.682 11.052 12.3287 10.5429L12.3288 10.5429L12.3319 10.5404L16.8429 6.93038L16.8645 6.91311L16.884 6.89355L16.964 6.81355L16.981 6.79655L16.9963 6.77799C17.3883 6.30234 17.3891 5.61016 16.9782 5.13353L16.9718 5.1261L16.9651 5.11893C16.7402 4.87785 16.4355 4.73417 16.1205 4.70251Z" />
+                        </svg>
+                    </mat-icon>
+                    <mat-hint class="danger" *ngIf="addnewUserSubmitted && n.email.errors?.required">Email Id is
+                        required.
+                    </mat-hint>
+                    <mat-hint class="danger" *ngIf="n.email.errors?.email">Email address is in wrong
+                        format.
+                    </mat-hint>
+                    <mat-hint class="danger" *ngIf="n.email.errors?.duplicate">
+                        Email ID not available.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Phone Number</mat-label>
+                    <input type="text" id="mobile" formControlName="mobile" class="onlyNumberKey"
+                        (keypress)="onlyNumberKey($event)" maxlength='10' matInput>
+                    <mat-icon matSuffix>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="imageColors"
+                                d="M12.3561 0.00792976C12.133 -0.0240483 11.9089 0.0419064 11.7307 0.183809C11.5474 0.32771 11.4329 0.535567 11.408 0.768408C11.3552 1.23908 11.6948 1.66479 12.1649 1.71776C15.4065 2.07951 17.9262 4.60477 18.2907 7.85654C18.3395 8.29224 18.705 8.62101 19.1412 8.62101C19.174 8.62101 19.2059 8.61902 19.2388 8.61502C19.4668 8.59004 19.67 8.47711 19.8134 8.29724C19.9558 8.11736 20.0206 7.89351 19.9947 7.66467C19.5405 3.60746 16.4005 0.45862 12.3561 0.00792976Z" />
+                            <path id="imageColors"
+                                d="M12.4183 3.48988C11.9422 3.40194 11.505 3.70573 11.4144 4.17041C11.3238 4.6351 11.6285 5.08878 12.0916 5.17972C13.4859 5.45153 14.5624 6.53079 14.8353 7.92983C14.913 8.33256 15.2675 8.62635 15.6759 8.62635C15.7306 8.62635 15.7854 8.62136 15.8412 8.61136C16.3043 8.51843 16.609 8.06574 16.5184 7.60006C16.1111 5.51049 14.5027 3.8966 12.4183 3.48988Z" />
+                            <path id="imageColors"
+                                d="M13.6378 12.3543C12.5152 12.7476 11.2506 13.1906 9.03174 10.9724C6.81304 8.75431 7.255 7.48904 7.64729 6.36597C7.96031 5.46983 8.24171 4.66423 7.11449 3.53733C6.80949 3.23241 6.535 2.94351 6.28214 2.67738C4.50501 0.806958 3.79649 0.061244 1.07397 2.78395C1.05361 2.80927 1.01862 2.84345 0.973396 2.88761C0.324873 3.52102 -2.42781 6.20951 5.6846 14.3197C13.7947 22.4275 16.4815 19.6749 17.1153 19.0256C17.1596 18.9802 17.1938 18.9451 17.2192 18.9247C19.9403 16.2044 19.1921 15.4928 17.3149 13.7072C17.0519 13.457 16.7666 13.1857 16.4656 12.8848C15.3385 11.7585 14.5334 12.0406 13.6378 12.3543Z" />
+                        </svg>
+                    </mat-icon>
+                    <mat-hint class="danger" *ngIf="n.mobile.errors?.minlength"> Invalid phone
+                        number.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="content">Credential Information</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>User Name</mat-label>
+                    <input class="checkForuser_name-input" (keyup)="checkUserIdOrEmailId('username','add')"
+                        onkeydown="return /[a-zA-Z0-9-_]/i.test(event.key)" type="text" id="user_name"
+                        formControlName="user_name" autocomplete="off" matInput >
+
+                    <mat-icon matSuffix>
+                        <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path id="strokecolor" id="imageColors"
+                                d="M8 13.6739C10.1572 13.6739 12.0862 13.8512 13.4601 14.3378C14.1437 14.5799 14.6548 14.8866 14.9915 15.2541C15.3178 15.6103 15.5 16.0437 15.5 16.599C15.5 17.1535 15.3171 17.5849 14.9897 17.9388C14.6517 18.3042 14.1386 18.6084 13.4531 18.8478C12.0756 19.3289 10.1461 19.5 8 19.5C5.84334 19.5 3.9143 19.3228 2.5403 18.8362C1.85663 18.5941 1.34539 18.2873 1.00864 17.9198C0.682206 17.5636 0.5 17.1302 0.5 16.575C0.5 16.0205 0.682942 15.589 1.0103 15.2351C1.34831 14.8697 1.86139 14.5655 2.54688 14.3261C3.92436 13.845 5.85395 13.6739 8 13.6739ZM8 0.5C10.6632 0.5 12.794 2.6304 12.794 5.29105C12.794 7.95183 10.6631 10.0831 8 10.0831C5.33787 10.0831 3.20601 7.95177 3.20601 5.29105C3.20601 2.63046 5.33775 0.5 8 0.5Z" />
+                        </svg>
+
+                    </mat-icon>
+
+                    <mat-hint class="danger" *ngIf="addnewUserSubmitted && n.user_name.errors?.required">
+                        Username is required.
+                    </mat-hint>
+
+                    <mat-hint class="danger" *ngIf="n.user_name.errors?.duplicate">
+                        Username not available.
+                    </mat-hint>
+                    <mat-hint class="danger" *ngIf="n.user_name.errors?.pattern">Special Characters not allowed.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-sm-3 padding-0px">
+
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input maxlength='12' type="password" id="password" formControlName="paswd" autocomplete="new-password" matInput>
+                    <mat-icon matSuffix class="showPassword" (click)="showPassword()">
+                        <img class="img-vertical-align" src='{{"../../../../assets/login/" + passwordicon +".svg"}}'
+                            alt="password" />
+                    </mat-icon>
+                    <mat-hint class="danger" *ngIf="addnewUserSubmitted && n.paswd.errors?.required"> password is
+                        required.
+                    </mat-hint>
+                    <mat-hint class="danger" *ngIf="n.paswd.errors?.minlength">
+                        password should be atleast 6 characters.
+                    </mat-hint>
+                </mat-form-field>
+                <p class="note"><b>Note:</b> Password must be atleast 6-12 characters long and can contain
+                    numbers or special character.</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="content">Assign Role/s</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3 padding-0px">
+                <mat-form-field style="width: inherit;" appearance="outline">
+                    <mat-label>Role/s</mat-label>
+                    <mat-select formControlName="role" id="role">
+                        <!-- <mat-select formControlName="roleid" id="roleid" [(value)]="roleid" multiple> -->
+                        <span *ngFor='let r of allRoles'>
+                            <mat-option [value]="r.role_id">{{r.role_name}}</mat-option>
+                        </span>
+                    </mat-select>
+                    <mat-hint class="danger" *ngIf="addnewUserSubmitted && n.role.errors?.required"> Role is
+                        required.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <button class="btn btn-dark add-button submitaddnewuser-button" type="submit" (click)="addNewUser()">
+                    SUBMIT
+                </button>
+                <button class="btn btn-light cancel-button" type="button" (click)="backToManageUser()">
+                    CLEAR ALL</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Delete user Model -->
+<button class="display-none" id="openuserdeleteModel" data-bs-toggle="modal" data-bs-target="#userdeleteModel">Open User
+    Delete Model</button>
+<div class="modal" id="userdeleteModel" *ngIf=true>
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                Are you sure. Do you want to delete user <b>{{deletinguser}} </b>?
+                <div>
+                    <button type="button" class="btn btn-dark add-button deleteUser-button"
+                        (click)="deleteUser()">DELETE</button>
+                    <button class="btn btn-light cancel-button" id="closedeleteusermodel" data-bs-dismiss="modal"
+                        type="button">CANCEL</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
