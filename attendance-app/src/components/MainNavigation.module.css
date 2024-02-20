@@ -1,0 +1,95 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1.5px solid rgb(207, 204, 204);
+  padding: 20px;
+}
+
+.leftContent {
+  display: flex;
+  align-items: center;
+}
+
+.leftContent h1 {
+  font-size: 2rem;
+}
+
+.rightContent {
+  display: flex;
+  align-items: center;
+  gap: 15px
+}
+
+.profileName {
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profileImg {
+  width: 35px;
+  height: 35px;
+}
+
+.role {
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 10px;
+  text-align: right;
+}
+
+.alertImg,
+.settingImg {
+  height: 20px;
+  width: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    /* Stack items vertically on small screens */
+    align-items: flex-start;
+  }
+
+  .leftContent h1 {
+    font-size: 1.5rem;
+    /* Decrease font size for h1 */
+  }
+
+  .rightContent {
+    margin-top: 10px;
+    /* Add margin to separate from the left content */
+  }
+
+  .profileName {
+    font-size: 16px;
+    /* Decrease font size for profile name */
+    line-height: 20px;
+  }
+
+  .profileImg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .role {
+    font-size: 10px;
+    /* Decrease font size for role */
+    line-height: 8px;
+  }
+
+  .alertImg,
+  .settingImg {
+    height: 18px;
+    /* Decrease image size */
+    width: 18px;
+  }
+}

@@ -1,0 +1,76 @@
+.logo {
+  padding-left: 30px;
+  padding-top: 20px;
+}
+
+.list {
+  line-height: 2.5;
+  padding-left: 1rem;
+}
+
+.list li {
+  padding: 0.5rem;
+  margin-right: 20px;
+
+}
+
+.list a {
+  text-decoration: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+.list img {
+  height: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.list a:hover,
+.list a.active {
+  background-color: rgb(129, 185, 233);
+  border-radius: 5px;
+}
+
+aside {
+  background: #0C79C3;
+  height: 100vh;
+  min-width: 315px;
+}
+
+/* Responsive styles */
+/* Responsive styles for mobile view */
+@media (max-width: 768px) {
+  .logo {
+    padding-left: 15px;
+  }
+
+  .list {
+    padding-left: 0.5rem;
+    margin-top: 10px;
+  }
+
+  .list li {
+    margin-right: 10px;
+  }
+
+  .list a {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .list img {
+    height: 16px;
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+}
